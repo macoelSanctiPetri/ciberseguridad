@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ciberseguridad para 4.º de ESO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero" id="inicio">
+    <div class="hero__content">
+      <p class="badge">Digitalización · 4.º de ESO</p>
+      <h1>Aprende a cuidarte en línea con la ciberseguridad</h1>
+      <p class="lead">La ciberseguridad es el conjunto de hábitos, herramientas y actitudes que protegen nuestra identidad, privacidad y dispositivos frente a los <strong>villanos digitales</strong>: personas u organizaciones que intentan robar datos o dañar nuestros equipos.</p>
+      <div class="hero__buttons">
+        <a class="button" href="#protegernos">Cómo protegernos</a>
+        <a class="button button--ghost" href="#ataques">Ataques más frecuentes</a>
+      </div>
+    </div>
+    <div class="hero__image">
+      <picture>
+        <source srcset="assets/portada-ciberseguridad.png" type="image/png" />
+        <img src="assets/portada-ciberseguridad.png" alt="Ciberseguridad: tu escudo en el mundo digital" loading="lazy" decoding="async" />
+      </picture>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="que-es">
+      <div class="section__header">
+        <p class="kicker">Introducción</p>
+        <h2>¿Qué es la ciberseguridad y por qué importa?</h2>
+      </div>
+      <div class="grid two-cols">
+        <div>
+          <p>La ciberseguridad protege nuestros datos, dispositivos y redes frente a usos no autorizados. Tiene tres pilares:</p>
+          <ul>
+            <li><strong>Confidencialidad:</strong> solo las personas autorizadas acceden a la información.</li>
+            <li><strong>Integridad:</strong> la información permanece intacta y sin manipulaciones.</li>
+            <li><strong>Disponibilidad:</strong> la información y los servicios están accesibles cuando los necesitas.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>¿Quiénes son los villanos?</h3>
+          <p>Atacantes que buscan beneficio económico, fama o causar daño. Pueden ser ciberdelincuentes, grupos organizados, gente que te conoce (acoso o suplantación) o usuarios curiosos que prueban suerte.</p>
+          <h3>¿Qué problemas nos generan?</h3>
+          <ul class="icon-list">
+            <li>Robo de identidad y cuentas.</li>
+            <li>Pérdida de privacidad (fotos, chats, ubicación).</li>
+            <li>Fraude económico o compras no autorizadas.</li>
+            <li>Acoso, sextorsión o chantajes.</li>
+            <li>Bloqueo de dispositivos o eliminación de trabajos.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--highlight" id="protegernos">
+      <div class="section__header">
+        <p class="kicker">Hábitos clave</p>
+        <h2>Cómo protegernos en la adolescencia</h2>
+      </div>
+      <div class="grid three-cols">
+        <div class="card">
+          <h3>Gestión de cuentas</h3>
+          <ul>
+            <li>Usa contraseñas largas, únicas y con gestor de contraseñas.</li>
+            <li>Activa la <strong>verificación en dos pasos</strong> (código SMS o app) en todas tus redes.</li>
+            <li>No compartas credenciales ni fotos de pantallas con claves.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Privacidad y redes sociales</h3>
+          <ul>
+            <li>Revisa la configuración de privacidad: limita quién ve tus publicaciones y tu ubicación.</li>
+            <li>No subas imágenes comprometidas ni compartas datos personales (centro, rutinas, teléfono).</li>
+            <li>Desconfía de concursos, enlaces acortados y cuentas falsas.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Dispositivos y conexiones</h3>
+          <ul>
+            <li>Actualiza sistema, apps y antivirus con regularidad.</li>
+            <li>Usa Wi‑Fi conocidas; evita redes públicas para compras o banca.</li>
+            <li>Descarga apps solo de tiendas oficiales; revisa permisos.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <p><strong>Si dudas, pide ayuda.</strong> Ante un problema habla con una persona adulta de confianza y conserva capturas o correos: son pruebas útiles para denunciar.</p>
+      </div>
+    </section>
+
+    <section class="section" id="ataques">
+      <div class="section__header">
+        <p class="kicker">Guía INCIBE</p>
+        <h2>Ataques frecuentes, peligrosidad y cómo actuar</h2>
+        <p>Basado en la guía de ciberataques del INCIBE. Cada ataque incluye su nivel de riesgo (★ bajo · ★★ medio · ★★★ alto) y la forma de protegerte.</p>
+      </div>
+      <div class="grid two-cols">
+        <article class="attack">
+          <div class="attack__media">
+            <img src="assets/attack-phishing.svg" alt="Ilustración de phishing y correos engañosos" loading="lazy" decoding="async" />
+          </div>
+          <div class="attack__body">
+            <div class="attack__title">
+              <h3>Phishing (suplantación por correo o mensajes)</h3>
+              <span class="risk risk--high">★★★</span>
+            </div>
+            <p>Mensajes que imitan a empresas o amistades para que hagas clic o compartas datos.</p>
+            <p class="tip"><strong>Protégete:</strong> desconfía de urgencias o premios, verifica la dirección del remitente, no abras adjuntos sospechosos y accede siempre desde la web oficial.</p>
+          </div>
+        </article>
+        <article class="attack">
+          <div class="attack__media">
+            <img src="assets/attack-malware.svg" alt="Ilustración de malware y bloqueo de archivos" loading="lazy" decoding="async" />
+          </div>
+          <div class="attack__body">
+            <div class="attack__title">
+              <h3>Malware y ransomware</h3>
+              <span class="risk risk--high">★★★</span>
+            </div>
+            <p>Programas dañinos que se instalan al abrir adjuntos o apps falsas. El ransomware cifra tus archivos y pide dinero.</p>
+            <p class="tip"><strong>Protégete:</strong> instala solo desde tiendas oficiales, mantén antivirus y copias de seguridad, y no ejecutes archivos de origen desconocido.</p>
+          </div>
+        </article>
+        <article class="attack">
+          <div class="attack__media">
+            <img src="assets/attack-cuentas.svg" alt="Ilustración de cuentas protegidas con candados" loading="lazy" decoding="async" />
+          </div>
+          <div class="attack__body">
+            <div class="attack__title">
+              <h3>Robo o filtración de cuentas</h3>
+              <span class="risk risk--high">★★★</span>
+            </div>
+            <p>Alguien accede a tus redes o correo para suplantarte o difundir tus datos.</p>
+            <p class="tip"><strong>Protégete:</strong> usa contraseñas únicas, 2FA y revisa sesiones abiertas. Si te pasa, cambia la clave, cierra sesiones y avisa a tus contactos.</p>
+          </div>
+        </article>
+        <article class="attack">
+          <div class="attack__media">
+            <img src="assets/attack-ingenieria-social.svg" alt="Ilustración de ingeniería social y engaños" loading="lazy" decoding="async" />
+          </div>
+          <div class="attack__body">
+            <div class="attack__title">
+              <h3>Ingeniería social</h3>
+              <span class="risk risk--medium">★★</span>
+            </div>
+            <p>Manipulación para que entregues datos o hagas algo (por ejemplo, alguien que se hace pasar por soporte o un amigo).</p>
+            <p class="tip"><strong>Protégete:</strong> verifica identidades por otro canal, no compartas códigos temporales y pon límites a la información que das.</p>
+          </div>
+        </article>
+        <article class="attack">
+          <div class="attack__media">
+            <img src="assets/attack-sextorsion.svg" alt="Ilustración de sextorsión y protección de privacidad" loading="lazy" decoding="async" />
+          </div>
+          <div class="attack__body">
+            <div class="attack__title">
+              <h3>Sextorsión y acoso digital</h3>
+              <span class="risk risk--high">★★★</span>
+            </div>
+            <p>Chantaje con imágenes íntimas o amenazas en redes.</p>
+            <p class="tip"><strong>Protégete:</strong> no compartas contenido íntimo, configura la privacidad, bloquea y reporta perfiles agresivos. Guarda pruebas y busca ayuda adulta o en <a href="https://www.incibe.es/linea-de-ayuda-en-ciberseguridad" target="_blank" rel="noreferrer">017 de INCIBE</a>.</p>
+          </div>
+        </article>
+        <article class="attack">
+          <div class="attack__media">
+            <img src="assets/attack-spoofing.svg" alt="Ilustración de suplantación de identidad" loading="lazy" decoding="async" />
+          </div>
+          <div class="attack__body">
+            <div class="attack__title">
+              <h3>Suplantación de identidad (spoofing)</h3>
+              <span class="risk risk--medium">★★</span>
+            </div>
+            <p>Creación de perfiles falsos o falsificación de remitentes para engañarte.</p>
+            <p class="tip"><strong>Protégete:</strong> comprueba la autenticidad de perfiles, usa marcas de verificación y sospecha de solicitudes de dinero o información personal.</p>
+          </div>
+        </article>
+        <article class="attack">
+          <div class="attack__media">
+            <img src="assets/attack-juegos.svg" alt="Ilustración de fraude en juegos y apps" loading="lazy" decoding="async" />
+          </div>
+          <div class="attack__body">
+            <div class="attack__title">
+              <h3>Fraude en juegos y apps</h3>
+              <span class="risk risk--medium">★★</span>
+            </div>
+            <p>Ofertas de monedas, skins o ventajas que buscan robar tus credenciales o infectar tu equipo.</p>
+            <p class="tip"><strong>Protégete:</strong> compra solo en tiendas oficiales, desconfía de chollos y no compartas tu cuenta de juego.</p>
+          </div>
+        </article>
+        <article class="attack">
+          <div class="attack__media">
+            <img src="assets/attack-iot.svg" alt="Ilustración de ataques a dispositivos IoT" loading="lazy" decoding="async" />
+          </div>
+          <div class="attack__body">
+            <div class="attack__title">
+              <h3>Ataques a dispositivos IoT (auriculares, relojes, consolas)</h3>
+              <span class="risk risk--medium">★★</span>
+            </div>
+            <p>Aprovechan configuraciones inseguras para espiar o secuestrar dispositivos conectados.</p>
+            <p class="tip"><strong>Protégete:</strong> cambia contraseñas predeterminadas, actualiza el firmware y desactiva funciones que no uses.</p>
+          </div>
+        </article>
+        <article class="attack">
+          <div class="attack__media">
+            <img src="assets/attack-ddos.svg" alt="Ilustración de ataques de denegación de servicio" loading="lazy" decoding="async" />
+          </div>
+          <div class="attack__body">
+            <div class="attack__title">
+              <h3>Denegación de servicio (DDoS) a servicios en línea</h3>
+              <span class="risk risk--low">★</span>
+            </div>
+            <p>Sobrecarga de un servicio para dejarlo inaccesible. Como usuarios solemos recibir el impacto (juegos o clases en línea caídas) más que originarlo.</p>
+            <p class="tip"><strong>Protégete:</strong> usa redes fiables y evita compartir herramientas que prometen “tirar servidores”; son ilegales y pueden infectarte.</p>
+          </div>
+        </article>
+        <article class="attack">
+          <div class="attack__media">
+            <img src="assets/attack-robo-dispositivo.svg" alt="Ilustración de robo físico de dispositivos" loading="lazy" decoding="async" />
+          </div>
+          <div class="attack__body">
+            <div class="attack__title">
+              <h3>Pérdida o robo físico de dispositivos</h3>
+              <span class="risk risk--medium">★★</span>
+            </div>
+            <p>Alguien accede a tu móvil u ordenador aprovechando que no están bloqueados.</p>
+            <p class="tip"><strong>Protégete:</strong> usa PIN o huella, configura “Encontrar mi dispositivo”, cifra el contenido y realiza copias en la nube.</p>
+          </div>
+        </article>
+      </div>
+      <div class="callout callout--secondary">
+        <p><strong>Recuerda:</strong> si algo sale mal, respira, pide apoyo y documenta lo ocurrido. La ciberseguridad es un trabajo en equipo.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__content">
+      <p><strong>Digitalización · 4.º ESO</strong> — Recurso educativo sobre ciberseguridad.</p>
+      <p>Basado en la guía de ciberataques de <a href="https://www.incibe.es" target="_blank" rel="noreferrer">INCIBE</a>. Ilustración de cabecera provista localmente.</p>
+    </div>
+  </footer>
+</body>
+</html>

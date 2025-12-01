@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0a2a43" />
+      <stop offset="50%" stop-color="#0f4c75" />
+      <stop offset="100%" stop-color="#1b262c" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#grad)"/>
+  <circle cx="200" cy="120" r="90" fill="#bbe1fa" opacity="0.16"/>
+  <circle cx="900" cy="480" r="120" fill="#bbe1fa" opacity="0.12"/>
+  <rect x="80" y="150" width="1040" height="320" rx="24" fill="#ffffff" opacity="0.08" stroke="#bbe1fa" stroke-width="3" stroke-dasharray="16 12"/>
+  <text x="600" y="300" font-family="'Inter', 'Arial', sans-serif" font-size="44" text-anchor="middle" fill="#ffffff" font-weight="700">Añade aquí la imagen de introducción</text>
+  <text x="600" y="360" font-family="'Inter', 'Arial', sans-serif" font-size="24" text-anchor="middle" fill="#bbe1fa">Reemplaza assets/introduccion-placeholder.svg por tu recurso</text>
+</svg>
