@@ -203,14 +203,16 @@ main {
 
 .attack__image {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  max-height: 190px;
-  object-fit: cover;
+  height: 150px;          /* reduce altura sin afectar al ancho */
+  max-height: 150px;
+  object-fit: cover;      /* mantiene el ancho lleno recortando lo justo */
+  object-position: 50% 40%;
   display: block;
   border-radius: 0.8rem;
   border: 1px solid var(--border);
   margin-bottom: 0.85rem;
   background: #0d1c2b;
+  padding: 4px;           /* leve margen interno para suavizar los bordes */
 }
 
 .attack__title {
