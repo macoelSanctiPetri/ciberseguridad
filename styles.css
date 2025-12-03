@@ -203,8 +203,8 @@ main {
 
 .attack__image {
   width: 100%;
-  height: 150px;          /* reduce altura sin afectar al ancho */
-  max-height: 150px;
+  height: 235px;          /* pequeño extra de altura */
+  max-height: 235px;
   object-fit: cover;      /* mantiene el ancho lleno recortando lo justo */
   object-position: 50% 40%;
   display: block;
@@ -213,6 +213,34 @@ main {
   margin-bottom: 0.85rem;
   background: #0d1c2b;
   padding: 4px;           /* leve margen interno para suavizar los bordes */
+}
+
+.attack-list {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.attack-list__group {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.attack-list__group h3 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+}
+
+.attack-list__group ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+
+.attack-list__group li {
+  margin-bottom: 0.35rem;
 }
 
 .attack__title {
@@ -254,6 +282,73 @@ main {
   margin: 0 auto;
 }
 
+.attack-title__icon {
+  float: right;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.6rem;
+}
+
+.attack-title__icon img {
+  height: 8.4rem;
+  width: auto;
+  vertical-align: middle;
+}
+
+.attack-list__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1.1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.attack-list__grid--stacked {
+  grid-template-columns: 1fr;
+}
+
+.attack-list__embed object {
+  width: 100%;
+  height: 340px;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  background: #0b1622;
+}
+
+.attack-list__embed {
+  display: grid;
+  gap: 0.8rem;
+  justify-items: center;
+}
+
+.attack-list__embed--double {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.embed-card {
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+  width: min(100%, 620px);
+}
+
+.embed-card figcaption {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.embed-fallback {
+  display: inline-block;
+  margin-top: 0.45rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .attack-list__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 720px) {
   .hero__buttons {
     flex-direction: column;
@@ -262,5 +357,18 @@ main {
 
   .hero__image {
     order: -1;
+  }
+
+  .attack-title__icon {
+    float: none;
+    margin-left: 0.35rem;
+  }
+
+  .attack-title__icon img {
+    height: 3rem;
+  }
+
+  .attack-list__embed object {
+    height: 240px;
   }
 }
