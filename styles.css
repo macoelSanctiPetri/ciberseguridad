@@ -580,6 +580,27 @@ main {
   text-align: center;
 }
 
+.villains-pdf {
+  margin-top: 1rem;
+}
+
+.villains-pdf object {
+  width: 100%;
+  min-height: 280px;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  background: #0b1622;
+  display: block;
+}
+
+.villains-pdf .embed-fallback {
+  display: block;
+  text-align: center;
+  margin-top: 0.45rem;
+  font-size: 0.92rem;
+}
+
 @media (max-width: 900px) {
   .attack-list__grid {
     grid-template-columns: 1fr;
