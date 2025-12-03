@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Instagram">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f58529"/>
+      <stop offset="50%" stop-color="#dd2a7b"/>
+      <stop offset="100%" stop-color="#515bd4"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+  <path fill="#fff" d="M40.6 16H23.4A7.4 7.4 0 0 0 16 23.4v17.2A7.4 7.4 0 0 0 23.4 48h17.2A7.4 7.4 0 0 0 48 40.6V23.4A7.4 7.4 0 0 0 40.6 16Zm-6.6 22.7a6.6 6.6 0 1 1 0-13.3 6.6 6.6 0 0 1 0 13.3Zm7-12.7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/>
+  <circle cx="32" cy="32" r="4.5" fill="#fff"/>
+</svg>

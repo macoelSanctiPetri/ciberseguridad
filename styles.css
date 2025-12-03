@@ -32,6 +32,29 @@ a:hover {
   text-decoration: underline;
 }
 
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem clamp(1.2rem, 4vw, 2.4rem);
+  background: rgba(11, 22, 34, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.top-nav a {
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.top-nav a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
 header.hero {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -105,6 +128,18 @@ header.hero {
 .hero__image img {
   max-width: min(520px, 100%);
   border-radius: 1.2rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.pillars-image {
+  margin-top: 1rem;
+}
+
+.pillars-image img {
+  width: 100%;
+  max-width: 560px;
+  border-radius: 0.8rem;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
 }
@@ -187,9 +222,94 @@ main {
   color: #dbeafe;
 }
 
+.privacy-card {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.privacy-videos {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.privacy-videos iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+}
+
+.video-thumb {
+  display: block;
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.video-thumb img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.play-badge {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+}
+
+.video-thumb:hover .play-badge {
+  background: rgba(16, 185, 129, 0.85);
+}
+
+.privacy-videos figcaption {
+  margin-top: 0.35rem;
+  color: var(--text);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.privacy-icon {
+  font-size: 1.1rem;
+}
+
+.privacy-icon-img {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.cc-icon {
+  height: 20px;
+  width: auto;
+  vertical-align: text-bottom;
+  margin-right: 0.35rem;
+}
+
 .callout--secondary {
   background: rgba(16, 185, 129, 0.08);
   color: #b9f6e8;
+}
+
+.protect-embed {
+  margin-top: 1.5rem;
 }
 
 .attack {
@@ -283,15 +403,15 @@ main {
 }
 
 .attack-title__icon {
-  float: right;
-  display: inline-flex;
-  align-items: center;
-  margin-left: 0.6rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
 }
 
 .attack-title__icon img {
-  height: 8.4rem;
-  width: auto;
+  width: 50%;
+  max-width: 340px;
+  height: auto;
   vertical-align: middle;
 }
 
@@ -302,13 +422,20 @@ main {
   align-items: start;
 }
 
+.attack-list__group--passwords .attack-list__grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
 .attack-list__grid--stacked {
   grid-template-columns: 1fr;
 }
 
 .attack-list__embed object {
   width: 100%;
-  height: 340px;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  min-height: 320px;
+  max-height: 520px;
   border: 1px solid var(--border);
   border-radius: 0.75rem;
   box-shadow: var(--shadow);
@@ -329,7 +456,8 @@ main {
   margin: 0;
   display: grid;
   gap: 0.35rem;
-  width: min(100%, 620px);
+  width: 100%;
+  max-width: 640px;
 }
 
 .embed-card figcaption {
@@ -341,6 +469,29 @@ main {
   display: inline-block;
   margin-top: 0.45rem;
   font-size: 0.9rem;
+}
+
+.protect-embed object {
+  width: 70%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  min-height: 320px;
+  max-height: 520px;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  background: #0b1622;
+  display: block;
+  margin: 0.6rem auto 0.4rem auto;
+}
+
+.protect-embed {
+  text-align: left;
+}
+
+.protect-embed .embed-fallback {
+  display: block;
+  text-align: center;
 }
 
 @media (max-width: 900px) {
@@ -360,15 +511,17 @@ main {
   }
 
   .attack-title__icon {
-    float: none;
-    margin-left: 0.35rem;
+    margin-top: 0.5rem;
   }
 
   .attack-title__icon img {
-    height: 3rem;
+    width: 65%;
+    max-width: 260px;
+    height: auto;
   }
 
   .attack-list__embed object {
-    height: 240px;
+    min-height: 220px;
+    max-height: 360px;
   }
 }
