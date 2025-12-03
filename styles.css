@@ -205,6 +205,21 @@ main {
   margin-bottom: 0.4rem;
 }
 
+/* Iconos alineados a la derecha en títulos de tarjetas */
+.card__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.card__title-row .card__icon {
+  width: 88px;
+  height: 88px;
+  flex: 0 0 auto;
+}
+
 .icon-list {
   padding-left: 1.1rem;
 }
@@ -348,6 +363,50 @@ main {
   box-shadow: var(--shadow);
 }
 
+.attack-list__group--passwords {
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(180deg, rgba(11, 22, 34, 0.78), rgba(11, 22, 34, 0.92)),
+    url("assets/marca_agua_ataques_passwords.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.attack-list__group--social {
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(180deg, rgba(11, 22, 34, 0.78), rgba(11, 22, 34, 0.92)),
+    url("assets/marca_agua_ataques_ingenieria_social.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.attack-list__group--connections {
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(180deg, rgba(11, 22, 34, 0.78), rgba(11, 22, 34, 0.92)),
+    url("assets/marca_agua_ataques_conexiones.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.attack-list__group--malware {
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(180deg, rgba(11, 22, 34, 0.78), rgba(11, 22, 34, 0.92)),
+    url("assets/marca_agua_ataques_malware.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .attack-list__group h3 {
   margin-top: 0;
   margin-bottom: 0.4rem;
@@ -406,6 +465,8 @@ main {
   display: flex;
   justify-content: center;
   margin-top: 0.75rem;
+  flex-direction: column;
+  align-items: center;
 }
 
 .attack-title__icon img {
@@ -413,6 +474,13 @@ main {
   max-width: 340px;
   height: auto;
   vertical-align: middle;
+}
+
+.attack-title__note {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
 }
 
 .attack-list__grid {
@@ -469,6 +537,24 @@ main {
   display: inline-block;
   margin-top: 0.45rem;
   font-size: 0.9rem;
+}
+
+.glossary-embed {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 0.75rem;
+  box-shadow: var(--shadow);
+}
+
+.glossary-embed object {
+  width: 70%;
+  min-height: 70vh;
+  border: none;
+  border-radius: 0.6rem;
+  background: #0b1622;
+  display: block;
+  margin: 0 auto;
 }
 
 .protect-embed object {

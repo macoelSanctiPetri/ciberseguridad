@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -13,9 +13,10 @@
   <nav class="top-nav">
     <a href="#inicio">Inicio</a>
     <a href="#que-es">¿Qué es?</a>
-    <a href="#protegernos">Cómo protegernos</a>
+    <a href="#protegernos">¿Cómo protegernos?</a>
     <a href="#ataques">Ataques frecuentes</a>
     <a href="#lista-ataques">Referencia rápida</a>
+    <a href="#glosario">Glosario</a>
   </nav>
   <header class="hero" id="inicio">
     <div class="hero__content">
@@ -67,30 +68,38 @@
     <section class="section section--highlight" id="protegernos">
       <div class="section__header">
         <p class="kicker">Hábitos clave</p>
-        <h2>Cómo protegernos en la adolescencia</h2>
-      </div>
+        <h2>¿Cómo podemos protegernos en la adolescencia?</h2>
       <div class="grid three-cols">
-        <div class="card">
-          <h3>Gestión de cuentas</h3>
+        <div class="card card--protection">
+          <div class="card__title-row">
+            <h3>Gestión de cuentas</h3>
+            <img class="card__icon" src="assets/proteccion_adolesc_gestion_cuentas.png" alt="Icono gestión de cuentas seguras" loading="lazy" decoding="async">
+          </div>
           <ul>
             <li>Usa contraseñas largas, únicas y con gestor de contraseñas.</li>
             <li>Activa la <strong>verificación en dos pasos</strong> (código SMS o app) en todas tus redes.</li>
             <li>No compartas credenciales ni fotos de pantallas con claves.</li>
           </ul>
         </div>
-        <div class="card">
-          <h3>Privacidad y redes sociales</h3>
+        <div class="card card--protection">
+          <div class="card__title-row">
+            <h3>Privacidad y redes sociales</h3>
+            <img class="card__icon" src="assets/proteccion_adolesc_rrss.png" alt="Icono privacidad y redes sociales" loading="lazy" decoding="async">
+          </div>
           <ul>
             <li>Revisa la configuración de privacidad: limita quién ve tus publicaciones y tu ubicación.</li>
             <li>No subas imágenes comprometidas ni compartas datos personales (centro, rutinas, teléfono).</li>
             <li>Desconfía de concursos, enlaces acortados y cuentas falsas.</li>
           </ul>
         </div>
-        <div class="card">
-          <h3>Dispositivos y conexiones</h3>
+        <div class="card card--protection">
+          <div class="card__title-row">
+            <h3>Dispositivos y conexiones</h3>
+            <img class="card__icon" src="assets/proteccion_adolesc_dispositivos.png" alt="Icono dispositivos y conexiones seguras" loading="lazy" decoding="async">
+          </div>
           <ul>
             <li>Actualiza sistema, apps y antivirus con regularidad.</li>
-            <li>Usa Wi‑Fi conocidas; evita redes públicas para compras o banca.</li>
+            <li>Usa Wi-Fi conocidas; evita redes públicas para compras o banca.</li>
             <li>Descarga apps solo de tiendas oficiales; revisa permisos.</li>
           </ul>
         </div>
@@ -166,7 +175,6 @@
       <div class="section__header">
         <p class="kicker">Guía INCIBE</p>
         <h2>Ataques frecuentes, peligrosidad y cómo actuar</h2>
-        <p>Basado en la guía de ciberataques del INCIBE. Cada ataque incluye su nivel de riesgo (★ bajo · ★★ medio · ★★★ alto) y la forma de protegerte.</p>
       </div>
       <div class="grid two-cols">
         <article class="attack">
@@ -174,7 +182,7 @@
 
           <div class="attack__title">
             <h3>Phishing (suplantación por correo o mensajes)</h3>
-            <span class="risk risk--high">★★★</span>
+            <span class="risk risk--high">⚠⚠⚠</span>
           </div>
           <p>Mensajes que imitan a empresas o amistades para que hagas clic o compartas datos.</p>
           <p class="tip"><strong>Protégete:</strong> desconfía de urgencias o premios, verifica la dirección del remitente, no abras adjuntos sospechosos y accede siempre desde la web oficial.</p>
@@ -184,7 +192,7 @@
 
           <div class="attack__title">
             <h3>Malware y ransomware</h3>
-            <span class="risk risk--high">★★★</span>
+            <span class="risk risk--high">⚠⚠⚠</span>
           </div>
           <p>Programas dañinos que se instalan al abrir adjuntos o apps falsas. El ransomware cifra tus archivos y pide dinero.</p>
           <p class="tip"><strong>Protégete:</strong> instala solo desde tiendas oficiales, mantén antivirus y copias de seguridad, y no ejecutes archivos de origen desconocido.</p>
@@ -194,7 +202,7 @@
 
           <div class="attack__title">
             <h3>Robo o filtración de cuentas</h3>
-            <span class="risk risk--high">★★★</span>
+            <span class="risk risk--high">⚠⚠⚠</span>
           </div>
           <p>Alguien accede a tus redes o correo para suplantarte o difundir tus datos.</p>
           <p class="tip"><strong>Protégete:</strong> usa contraseñas únicas, 2FA y revisa sesiones abiertas. Si te pasa, cambia la clave, cierra sesiones y avisa a tus contactos.</p>
@@ -204,7 +212,7 @@
 
           <div class="attack__title">
             <h3>Ingeniería social</h3>
-            <span class="risk risk--medium">★★</span>
+            <span class="risk risk--medium">⚠⚠</span>
           </div>
           <p>Manipulación para que entregues datos o hagas algo (por ejemplo, alguien que se hace pasar por soporte o un amigo).</p>
           <p class="tip"><strong>Protégete:</strong> verifica identidades por otro canal, no compartas códigos temporales y pon límites a la información que das.</p>
@@ -214,7 +222,7 @@
 
           <div class="attack__title">
             <h3>Sextorsión y acoso digital</h3>
-            <span class="risk risk--high">★★★</span>
+            <span class="risk risk--high">⚠⚠⚠</span>
           </div>
           <p>Chantaje con imágenes íntimas o amenazas en redes.</p>
           <p class="tip"><strong>Protégete:</strong> no compartas contenido íntimo, configura la privacidad, bloquea y reporta perfiles agresivos. Guarda pruebas y busca ayuda adulta o en <a href="https://www.incibe.es/linea-de-ayuda-en-ciberseguridad" target="_blank" rel="noreferrer">017 de INCIBE</a>.</p>
@@ -224,7 +232,7 @@
 
           <div class="attack__title">
             <h3>Suplantación de identidad (spoofing)</h3>
-            <span class="risk risk--medium">★★</span>
+            <span class="risk risk--medium">⚠⚠</span>
           </div>
           <p>Creación de perfiles falsos o falsificación de remitentes para engañarte.</p>
           <p class="tip"><strong>Protégete:</strong> comprueba la autenticidad de perfiles, usa marcas de verificación y sospecha de solicitudes de dinero o información personal.</p>
@@ -234,7 +242,7 @@
 
           <div class="attack__title">
             <h3>Fraude en juegos y apps</h3>
-            <span class="risk risk--medium">★★</span>
+            <span class="risk risk--medium">⚠⚠</span>
           </div>
           <p>Ofertas de monedas, skins o ventajas que buscan robar tus credenciales o infectar tu equipo.</p>
           <p class="tip"><strong>Protégete:</strong> compra solo en tiendas oficiales, desconfía de chollos y no compartas tu cuenta de juego.</p>
@@ -244,7 +252,7 @@
 
           <div class="attack__title">
             <h3>Ataques a dispositivos IoT (auriculares, relojes, consolas)</h3>
-            <span class="risk risk--medium">★★</span>
+            <span class="risk risk--medium">⚠⚠</span>
           </div>
           <p>Aprovechan configuraciones inseguras para espiar o secuestrar dispositivos conectados.</p>
           <p class="tip"><strong>Protégete:</strong> cambia contraseñas predeterminadas, actualiza el firmware y desactiva funciones que no uses.</p>
@@ -254,7 +262,7 @@
 
           <div class="attack__title">
             <h3>Denegación de servicio (DDoS) a servicios en línea</h3>
-            <span class="risk risk--low">★</span>
+            <span class="risk risk--low">⚠</span>
           </div>
           <p>Sobrecarga de un servicio para dejarlo inaccesible. Como usuarios solemos recibir el impacto (juegos o clases en línea caídas) más que originarlo.</p>
           <p class="tip"><strong>Protégete:</strong> usa redes fiables y evita compartir herramientas que prometen “tirar servidores”; son ilegales y pueden infectarte.</p>
@@ -264,7 +272,7 @@
 
           <div class="attack__title">
             <h3>Pérdida o robo físico de dispositivos</h3>
-            <span class="risk risk--medium">★★</span>
+            <span class="risk risk--medium">⚠⚠</span>
           </div>
           <p>Alguien accede a tu móvil u ordenador aprovechando que no están bloqueados.</p>
           <p class="tip"><strong>Protégete:</strong> usa PIN o huella, configura “Encontrar mi dispositivo”, cifra el contenido y realiza copias en la nube.</p>
@@ -297,6 +305,7 @@
                 <a href="https://www.incibe.es/ciudadania/blog/cuentas-comprometidas-compruebalo" target="_blank" rel="noreferrer" title="Comprueba si tus cuentas est&aacute;n comprometidas">
                   <img src="assets/chequeo_comprometidas.png" alt="Comprobar cuentas comprometidas" loading="lazy" decoding="async">
                 </a>
+                <p class="attack-title__note">Pincha y comprueba si tu cuenta est&aacute; comprometida.</p>
               </div>
             </div>
             <div class="attack-list__embed">
@@ -306,7 +315,7 @@
           </div>
         </div>
 
-        <div class="attack-list__group">
+        <div class="attack-list__group attack-list__group--social">
           <div class="attack-list__grid attack-list__grid--stacked">
             <div>
               <h3><a href="https://www.incibe.es/ciudadania/tematicas/ingenieria-social-fraudes-online" target="_blank" rel="noreferrer">Ataques por ingenier&iacute;a social</a></h3>
@@ -336,7 +345,7 @@
           </div>
         </div>
 
-        <div class="attack-list__group">
+        <div class="attack-list__group attack-list__group--connections">
           <h3>Ataques a las conexiones</h3>
           <ul>
             <li><strong>Redes trampa (wifi falsas):</strong> puntos de acceso gemelos para robar tr&aacute;fico y credenciales. <a href="https://www.incibe.es/aprendecibersegura/ciberamenazas" target="_blank" rel="noreferrer">Ampliar en INCIBE</a></li>
@@ -350,7 +359,7 @@
           </ul>
         </div>
 
-        <div class="attack-list__group">
+        <div class="attack-list__group attack-list__group--malware">
           <h3>Ataques por malware</h3>
           <ul>
             <li><strong>Virus:</strong> se copian y propagan infectando archivos y apps. <a href="https://www.incibe.es/aprendecibersegura/ciberamenazas/virus" target="_blank" rel="noreferrer">Ampliar en INCIBE</a></li>
@@ -371,6 +380,18 @@
         </div>
       </div>
     </section>
+
+    <section class="section" id="glosario">
+      <div class="section__header">
+        <p class="kicker">Consulta rápida</p>
+        <h2>Glosario de t&eacute;rminos de ciberseguridad</h2>
+        <p>Accede al glosario INCIBE para repasar definiciones clave y conceptos b&aacute;sicos.</p>
+      </div>
+      <div class="glossary-embed">
+        <object data="assets/guia_glosario_ciberseguridad_2021.pdf#view=FitH" type="application/pdf" aria-label="Glosario de t&eacute;rminos de ciberseguridad"></object>
+        <a class="embed-fallback" href="assets/guia_glosario_ciberseguridad_2021.pdf" target="_blank" rel="noreferrer">Abrir el glosario en una pesta&ntilde;a nueva</a>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -383,3 +404,7 @@
   </footer>
 </body>
 </html>
+
+
+
+
