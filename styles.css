@@ -430,12 +430,15 @@ main {
 }
 
 .risk {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #041215;
+  white-space: nowrap; /* evita que los iconos se partan en varias líneas */
 }
 
 .risk--high { background: #f472b6; }
