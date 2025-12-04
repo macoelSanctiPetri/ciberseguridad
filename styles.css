@@ -564,6 +564,25 @@ main {
   opacity: 0.96;
 }
 
+.tools-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(11, 22, 34, 0.78), rgba(11, 22, 34, 0.92));
+}
+
+.tools-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("assets/herramientas_seguridad.png") center/cover no-repeat;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.tools-card * {
+  position: relative;
+}
+
 .card-footer-link {
   display: inline-block;
   margin-top: 0.5rem;
