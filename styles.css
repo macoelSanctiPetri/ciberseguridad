@@ -561,6 +561,17 @@ main {
   opacity: 0.96;
 }
 
+.card-footer-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: var(--accent-2);
+}
+
+.card-footer-link:hover {
+  color: var(--accent);
+}
+
 .connections-badge {
   float: right;
   width: 220px;

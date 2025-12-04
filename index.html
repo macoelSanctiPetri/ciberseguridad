@@ -94,7 +94,7 @@
             <li>Revisa la configuración de privacidad: limita quién ve tus publicaciones y tu ubicación.</li>
             <li>No subas imágenes comprometidas ni compartas datos personales (centro, rutinas, teléfono).</li>
             <li>Desconfía de concursos, enlaces acortados y cuentas falsas.</li>
-          </ul>
+          </ul>\n          <a class="card-footer-link" href="#videos-privacidad">Ver vídeos de privacidad en redes sociales ↓</a>
         </div>
         <div class="card card--protection">
           <div class="card__title-row">
@@ -118,12 +118,9 @@
             <li>Activa bloqueador de pop-ups y evita dar permisos innecesarios al navegador.</li>
           </ul>
         </div>
-      </div>
-      <div class="callout">
-        <p><strong>Si dudas, pide ayuda.</strong> Ante un problema habla con una persona adulta de confianza y conserva capturas o correos: son pruebas útiles para denunciar.</p>
-      </div>
+      </div>
 
-      <div class="card privacy-card">
+      <div class="card privacy-card" id="videos-privacidad">
         <div>
           <h3>Privacidad en redes sociales (recursos INCIBE)</h3>
           <p>Refuerza tu privacidad con la guía oficial y videotutoriales de configuración paso a paso.</p>
@@ -187,118 +184,135 @@
     </section>
 
     <section class="section" id="ataques">
-      <div class="section__header">
-        <p class="kicker">Guía INCIBE</p>
-        <h2>Ataques frecuentes, peligrosidad y cómo actuar</h2>
+  <div class="section__header">
+    <p class="kicker">Guía INCIBE</p>
+    <h2>Ataques frecuentes, peligrosidad y cómo actuar</h2>
+  </div>
+  <div class="grid two-cols">
+    <!-- Riesgo alto -->
+    <article class="attack">
+      <img class="attack__image" src="assets/phishing.png" alt="Correo de phishing que suplanta a una empresa" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3><a href="https://www.incibe.es/ciudadania/tematicas/ingenieria-social-fraudes-online/phishing" target="_blank" rel="noreferrer">Phishing (suplantación por correo o mensajes)</a></h3>
+        <span class="risk risk--high">⚠⚠⚠</span>
       </div>
-      <div class="grid two-cols">
-        <article class="attack">
-          <img class="attack__image" src="assets/phishing.png" alt="Correo de phishing que suplanta a una empresa" loading="lazy" decoding="async">
+      <p>Mensajes que imitan a empresas o amistades para que hagas clic o compartas datos.</p>
+      <p class="tip"><strong>Protégete:</strong> desconfía de urgencias o premios, verifica el remitente y evita adjuntos sospechosos.</p>
+    </article>
 
-          <div class="attack__title">
-            <h3><a href="https://www.incibe.es/ciudadania/tematicas/ingenieria-social-fraudes-online/phishing" target="_blank" rel="noreferrer">Phishing (suplantación por correo o mensajes)</a></h3>
-            <span class="risk risk--high">⚠⚠⚠</span>
-          </div>
-          <p>Mensajes que imitan a empresas o amistades para que hagas clic o compartas datos.</p>
-          <p class="tip"><strong>Protégete:</strong> desconfía de urgencias o premios, verifica la dirección del remitente, no abras adjuntos sospechosos y accede siempre desde la web oficial.</p>
-        </article>
-        <article class="attack">
-          <img class="attack__image" src="assets/malware.png" alt="Ilustracion de malware en un ordenador" loading="lazy" decoding="async">
-
-          <div class="attack__title">
-            <h3>Malware y ransomware</h3>
-            <span class="risk risk--high">⚠⚠⚠</span>
-          </div>
-          <p>Programas dañinos que se instalan al abrir adjuntos o apps falsas. El ransomware cifra tus archivos y pide dinero.</p>
-          <p class="tip"><strong>Protégete:</strong> instala solo desde tiendas oficiales, mantén antivirus y copias de seguridad, y no ejecutes archivos de origen desconocido.</p>
-        </article>
-        <article class="attack">
-          <img class="attack__image" src="assets/robo_filtracion.png" alt="Robo o filtracion de cuentas en linea" loading="lazy" decoding="async">
-
-          <div class="attack__title">
-            <h3>Robo o filtración de cuentas</h3>
-            <span class="risk risk--high">⚠⚠⚠</span>
-          </div>
-          <p>Alguien accede a tus redes o correo para suplantarte o difundir tus datos.</p>
-          <p class="tip"><strong>Protégete:</strong> usa contraseñas únicas, 2FA y revisa sesiones abiertas. Si te pasa, cambia la clave, cierra sesiones y avisa a tus contactos.</p>
-        </article>
-        <article class="attack">
-          <img class="attack__image" src="assets/ingenieria_social.png" alt="Escena de ingenieria social manipulando a una persona" loading="lazy" decoding="async">
-
-          <div class="attack__title">
-            <h3>Ingeniería social</h3>
-            <span class="risk risk--medium">⚠⚠</span>
-          </div>
-          <p>Manipulación para que entregues datos o hagas algo (por ejemplo, alguien que se hace pasar por soporte o un amigo).</p>
-          <p class="tip"><strong>Protégete:</strong> verifica identidades por otro canal, no compartas códigos temporales y pon límites a la información que das.</p>
-        </article>
-        <article class="attack">
-          <img class="attack__image" src="assets/sextorsion.png" alt="Amenazas y sextorsion en linea" loading="lazy" decoding="async">
-
-          <div class="attack__title">
-            <h3>Sextorsión y acoso digital</h3>
-            <span class="risk risk--high">⚠⚠⚠</span>
-          </div>
-          <p>Chantaje con imágenes íntimas o amenazas en redes.</p>
-          <p class="tip"><strong>Protégete:</strong> no compartas contenido íntimo, configura la privacidad, bloquea y reporta perfiles agresivos. Guarda pruebas y busca ayuda adulta o en <a href="https://www.incibe.es/linea-de-ayuda-en-ciberseguridad" target="_blank" rel="noreferrer">017 de INCIBE</a>.</p>
-        </article>
-        <article class="attack">
-          <img class="attack__image" src="assets/spoofing.png" alt="Suplantacion de identidad digital" loading="lazy" decoding="async">
-
-          <div class="attack__title">
-            <h3><a href="https://www.incibe.es/menores/tematicas/suplantacion-de-identidad" target="_blank" rel="noreferrer">Suplantación de identidad (spoofing)</a></h3>
-            <span class="risk risk--medium">⚠⚠</span>
-          </div>
-          <p>Creación de perfiles falsos o falsificación de remitentes para engañarte.</p>
-          <p class="tip"><strong>Protégete:</strong> comprueba la autenticidad de perfiles, usa marcas de verificación y sospecha de solicitudes de dinero o información personal.</p>
-        </article>
-        <article class="attack">
-          <img class="attack__image" src="assets/fraudes_juegos.png" alt="Fraudes y estafas dentro de videojuegos" loading="lazy" decoding="async">
-
-          <div class="attack__title">
-            <h3>Fraude en juegos y apps</h3>
-            <span class="risk risk--medium">⚠⚠</span>
-          </div>
-          <p>Ofertas de monedas, skins o ventajas que buscan robar tus credenciales o infectar tu equipo.</p>
-          <p class="tip"><strong>Protégete:</strong> compra solo en tiendas oficiales, desconfía de chollos y no compartas tu cuenta de juego.</p>
-        </article>
-        <article class="attack">
-          <img class="attack__image" src="assets/ataques_iot.png" alt="Ataque a dispositivos IoT como relojes o consolas" loading="lazy" decoding="async">
-
-          <div class="attack__title">
-            <h3>Ataques a dispositivos IoT (auriculares, relojes, consolas)</h3>
-            <span class="risk risk--medium">⚠⚠</span>
-          </div>
-          <p>Aprovechan configuraciones inseguras para espiar o secuestrar dispositivos conectados.</p>
-          <p class="tip"><strong>Protégete:</strong> cambia contraseñas predeterminadas, actualiza el firmware y desactiva funciones que no uses.</p>
-        </article>
-        <article class="attack">
-          <img class="attack__image" src="assets/Denegacion_servicio.png" alt="Trafico malicioso provocando una denegacion de servicio" loading="lazy" decoding="async">
-
-          <div class="attack__title">
-            <h3>Denegación de servicio (DDoS) a servicios en línea</h3>
-            <span class="risk risk--low">⚠</span>
-          </div>
-          <p>Sobrecarga de un servicio para dejarlo inaccesible. Como usuarios solemos recibir el impacto (juegos o clases en línea caídas) más que originarlo.</p>
-          <p class="tip"><strong>Protégete:</strong> usa redes fiables y evita compartir herramientas que prometen “tirar servidores”; son ilegales y pueden infectarte.</p>
-        </article>
-        <article class="attack">
-          <img class="attack__image" src="assets/robo_datos.png" alt="Robo fisico de un movil con datos personales" loading="lazy" decoding="async">
-
-          <div class="attack__title">
-            <h3>Pérdida o robo físico de dispositivos</h3>
-            <span class="risk risk--medium">⚠⚠</span>
-          </div>
-          <p>Alguien accede a tu móvil u ordenador aprovechando que no están bloqueados.</p>
-          <p class="tip"><strong>Protégete:</strong> usa PIN o huella, configura “Encontrar mi dispositivo”, cifra el contenido y realiza copias en la nube.</p>
-        </article>
+    <article class="attack">
+      <img class="attack__image" src="assets/malware.png" alt="Ilustración de malware en un ordenador" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3><a href="https://www.incibe.es/empresas/tematicas/malware" target="_blank" rel="noreferrer">Malware</a> y <a href="https://www.incibe.es/empresas/tematicas/ransomware" target="_blank" rel="noreferrer">ransomware</a></h3>
+        <span class="risk risk--high">⚠⚠⚠</span>
       </div>
-      <div class="callout callout--secondary">
-        <p><strong>Recuerda:</strong> si algo sale mal, respira, pide apoyo y documenta lo ocurrido. La ciberseguridad es un trabajo en equipo.</p>
-      </div>
-    </section>
+      <p>Programas dañinos; el ransomware cifra tus archivos y pide dinero.</p>
+      <p class="tip"><strong>Protégete:</strong> instala solo desde tiendas oficiales, mantén antivirus y copias de seguridad, y no ejecutes archivos de origen desconocido.</p>
+    </article>
 
-    <section class="section" id="lista-ataques">
+    <article class="attack">
+      <img class="attack__image" src="assets/robo_filtracion.png" alt="Robo o filtración de cuentas en línea" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3>Robo o filtración de cuentas</h3>
+        <span class="risk risk--high">⚠⚠⚠</span>
+      </div>
+      <p>Acceden a tus redes o correo para suplantarte o difundir tus datos.</p>
+      <p class="tip"><strong>Protégete:</strong> usa contraseñas únicas, 2FA y revisa sesiones abiertas; si ocurre, cambia la clave y avisa a tus contactos.</p>
+    </article>
+
+    <article class="attack">
+      <img class="attack__image" src="assets/sextorsion.png" alt="Amenazas y sextorsión en línea" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3><a href="https://www.incibe.es/aprendeciberseguridad/sextorsion" target="_blank" rel="noreferrer">Sextorsión y acoso digital</a></h3>
+        <span class="risk risk--high">⚠⚠⚠</span>
+      </div>
+      <p><a href="https://www.incibe.es/sites/default/files/images/concienciacion/imagen-sextorsion.png" target="_blank" rel="noreferrer">Chantaje con imágenes íntimas o amenazas en redes.</a></p>
+      <p class="tip"><strong>Protégete:</strong> no compartas contenido íntimo, configura la privacidad, bloquea y reporta; guarda pruebas y pide ayuda (017 INCIBE).</p>
+    </article>
+
+    <article class="attack">
+      <img class="attack__image" src="assets/ciberacoso.png" alt="Ilustración de ciberacoso o cyberbullying" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3><a href="https://www.incibe.es/menores/tematicas/ciberacoso" target="_blank" rel="noreferrer">Ciberacoso (cyberbullying)</a></h3>
+        <span class="risk risk--high">⚠⚠⚠</span>
+      </div>
+      <p>Acoso mediante mensajes, humillaciones públicas, rumores o suplantaciones.</p>
+      <p class="tip"><strong>Protégete:</strong> bloquea y reporta, guarda capturas, pide ayuda a adultos o al <a href="https://www.incibe.es/linea-de-ayuda-en-ciberseguridad" target="_blank" rel="noreferrer">017 de INCIBE</a> y evita responder.</p>
+    </article>
+
+    <article class="attack">
+      <img class="attack__image" src="assets/grooming.png" alt="Engaño a menores en línea (grooming)" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3><a href="https://www.incibe.es/menores/tematicas/grooming" target="_blank" rel="noreferrer">Grooming</a></h3>
+        <span class="risk risk--high">⚠⚠⚠</span>
+      </div>
+      <p>Un adulto se hace pasar por menor para ganar tu confianza y obtener imágenes íntimas o concertar encuentros.</p>
+      <p class="tip"><strong>Protégete:</strong> no compartas fotos íntimas, desconfía de perfiles desconocidos, bloquea y reporta, y avisa a adultos o al <a href="https://www.incibe.es/linea-de-ayuda-en-ciberseguridad" target="_blank" rel="noreferrer">017 de INCIBE</a>.</p>
+    </article>
+
+    <!-- Riesgo medio -->
+    <article class="attack">
+      <img class="attack__image" src="assets/ingenieria_social.png" alt="Escena de ingeniería social" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3><a href="https://www.incibe.es/ciudadania/tematicas/ingenieria-social-fraudes-online" target="_blank" rel="noreferrer">Ingeniería social</a></h3>
+        <span class="risk risk--medium">⚠⚠</span>
+      </div>
+      <p>Manipulación para obtener datos o lograr que hagas algo.</p>
+      <p class="tip"><strong>Protégete:</strong> verifica identidades por otro canal y no compartas códigos temporales.</p>
+    </article>
+
+    <article class="attack">
+      <img class="attack__image" src="assets/spoofing.png" alt="Suplantación de identidad digital" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3><a href="https://www.incibe.es/menores/tematicas/suplantacion-de-identidad" target="_blank" rel="noreferrer">Suplantación de identidad (spoofing)</a></h3>
+        <span class="risk risk--medium">⚠⚠</span>
+      </div>
+      <p>Perfiles o remitentes falsos para engañarte.</p>
+      <p class="tip"><strong>Protégete:</strong> comprueba autenticidad, usa marcas de verificación y sospecha de solicitudes de dinero o datos.</p>
+    </article>
+
+    <article class="attack">
+      <img class="attack__image" src="assets/fraudes_juegos.png" alt="Fraudes y estafas dentro de videojuegos" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3>Fraude en juegos y apps</h3>
+        <span class="risk risk--medium">⚠⚠</span>
+      </div>
+      <p>Ofertas de monedas, skins o ventajas que buscan robar credenciales o infectar.</p>
+      <p class="tip"><strong>Protégete:</strong> compra solo en tiendas oficiales y desconfía de chollos.</p>
+    </article>
+
+    <article class="attack">
+      <img class="attack__image" src="assets/ataques_iot.png" alt="Ataque a dispositivos IoT como relojes o consolas" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3><a href="https://www.incibe.es/ciudadania/tematicas/dispositivos-iot" target="_blank" rel="noreferrer">Ataques a dispositivos IoT (auriculares, relojes, consolas)</a></h3>
+        <span class="risk risk--medium">⚠⚠</span>
+      </div>
+      <p>Aprovechan configuraciones inseguras para espiar o secuestrar dispositivos conectados.</p>
+      <p class="tip"><strong>Protégete:</strong> cambia contraseñas predeterminadas, actualiza firmware y desactiva funciones que no uses.</p>
+    </article>
+
+    <article class="attack">
+      <img class="attack__image" src="assets/robo_datos.png" alt="Robo físico de un móvil con datos personales" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3>Pérdida o robo físico de dispositivos</h3>
+        <span class="risk risk--medium">⚠⚠</span>
+      </div>
+      <p>Acceso a tu móvil u ordenador cuando no está bloqueado.</p>
+      <p class="tip"><strong>Protégete:</strong> usa PIN o huella, activa “Encontrar mi dispositivo”, cifra el contenido y realiza copias en la nube.</p>
+    </article>
+
+    <!-- Riesgo bajo -->
+    <article class="attack">
+      <img class="attack__image" src="assets/Denegacion_servicio.png" alt="Tráfico malicioso provocando una denegación de servicio" loading="lazy" decoding="async">
+      <div class="attack__title">
+        <h3>Denegación de servicio (DDoS) a servicios en línea</h3>
+        <span class="risk risk--low">⚠</span>
+      </div>
+      <p>Sobrecarga un servicio para dejarlo inaccesible.</p>
+      <p class="tip"><strong>Protégete:</strong> usa redes fiables y evita herramientas que prometen “tirar servidores”; son ilegales y pueden infectarte.</p>
+    </article>
+  </div>
+</section><section class="section" id="lista-ataques">
       <div class="section__header">
         <p class="kicker">Referencia r&aacute;pida</p>
         <h2>Lista completa de ataques por tipo</h2>
@@ -348,7 +362,7 @@
                 <li><strong>Shoulder surfing:</strong> Mirar el teclado o pantalla por encima del hombro.</li>
                 <li><strong>Dumpster diving:</strong> Rebuscar papelera o dispositivos desechados para extraer datos.</li>
                 <li><strong>Spam:</strong> Env&iacute;o masivo de mensajes no solicitados que pueden contener malware o fraudes.</li>
-                <li><strong>Fraudes online:</strong> Enga&ntilde;os para obtener dinero o datos personales.</li>
+                <li><strong><a href="https://www.incibe.es/ciudadania/tematicas/ingenieria-social-fraudes-online" target="_blank" rel="noreferrer">Fraudes online</a>:</strong> Enga&ntilde;os para obtener dinero o datos personales.</li>
               </ul>
             </div>
             <div class="attack-list__embed attack-list__embed--double">
@@ -433,6 +447,10 @@
   </footer>
 </body>
 </html>
+
+
+
+
 
 
 
