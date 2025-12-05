@@ -840,13 +840,23 @@
       <div class="section__header">
         <p class="kicker">Actualidad</p>
         <h2>Novedades de ciberseguridad</h2>
-        <p>Últimos avisos y vulnerabilidades publicados por INCIBE-CERT y CCN-CERT.</p>
+        <p>Últimos avisos y vulnerabilidades publicados por organismos oficiales.</p>
       </div>
+
       <div class="card news-card">
+        <h3>Novedades generales</h3>
         <div id="feed-ciberseguridad" class="news-feed">
           <p class="news-loading">Cargando novedades...</p>
         </div>
         <p class="news-footnote">Fuente: feeds públicos de INCIBE-CERT y CCN-CERT.</p>
+      </div>
+
+      <div class="card news-card is-hidden" aria-hidden="true">
+        <h3>Casos reales y recursos para menores</h3>
+        <div id="feed-menores" class="news-feed">
+          <p class="news-loading">Cargando casos reales...</p>
+        </div>
+        <p class="news-footnote">Fuente: canales RSS de INCIBE Menores, IS4K y Pantallas Amigas.</p>
       </div>
     </section>
   </main>
@@ -870,38 +880,50 @@
       "https://www.ccn-cert.cni.es/component/obrss/rss-ultimas-vulnerabilidades.feed"
     ];
 
+    // Feeds para casos reales y menores
+    const feedsMenores = [
+      "https://www.is4k.es/rss",
+      "https://www.pantallasamigas.net/feed",
+      "https://www.pantallasamigas.net/category/audio/feed/"
+    ];
+
     const rssToJsonUrl = (feedUrl) =>
       "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(feedUrl);
 
-    async function cargarFeeds() {
-      const contenedor = document.getElementById("feed-ciberseguridad");
+    async function fetchFeedEntries(feedUrl) {
+      // Intento único con rss2json (evita CORS y mantiene el parsing estable)
+      const resp = await fetch(rssToJsonUrl(feedUrl));
+      const data = await resp.json();
+      if (data.items && data.items.length) {
+        return data.items.map((item) => ({
+          titulo: item.title,
+          enlace: item.link,
+          fecha: new Date(item.pubDate || item.pub_date || item.date || Date.now()),
+          origen: data.feed && data.feed.title ? data.feed.title : new URL(feedUrl).hostname,
+        }));
+      }
+      return [];
+    }
+
+    async function cargarFeeds(listadoFeeds, contenedorId, limite = 10, mensajeError = "No se han podido cargar las novedades en este momento.", fallbackLinks = []) {
+      const contenedor = document.getElementById(contenedorId);
       if (!contenedor) return;
 
       try {
         const todasEntradas = [];
 
-        for (const feed of feeds) {
-          const resp = await fetch(rssToJsonUrl(feed));
-          const data = await resp.json();
-          if (data.items) {
-            data.items.forEach((item) => {
-              todasEntradas.push({
-                titulo: item.title,
-                enlace: item.link,
-                fecha: new Date(item.pubDate || item.pub_date || item.date || Date.now()),
-                origen: data.feed && data.feed.title ? data.feed.title : "Feed",
-              });
-            });
-          }
+        for (const feed of listadoFeeds) {
+          const entries = await fetchFeedEntries(feed);
+          todasEntradas.push(...entries);
         }
 
         if (!todasEntradas.length) {
-          contenedor.textContent = "No se han podido cargar las novedades en este momento.";
+          // deja el fallback estático visible
           return;
         }
 
         todasEntradas.sort((a, b) => b.fecha - a.fecha);
-        const ultimas = todasEntradas.slice(0, 10);
+        const ultimas = todasEntradas.slice(0, limite);
 
         const lista = document.createElement("ul");
         ultimas.forEach((entrada) => {
@@ -931,12 +953,20 @@
         contenedor.appendChild(lista);
       } catch (err) {
         console.error(err);
-        const contenedor = document.getElementById("feed-ciberseguridad");
-        if (contenedor) contenedor.textContent = "Ha ocurrido un error al cargar las novedades de ciberseguridad.";
+        // Si falla, dejamos el fallback estático
       }
     }
 
-    document.addEventListener("DOMContentLoaded", cargarFeeds);
+    document.addEventListener("DOMContentLoaded", () => {
+      cargarFeeds(feeds, "feed-ciberseguridad", 10, "No se han podido cargar las novedades en este momento.");
+      cargarFeeds(
+        feedsMenores,
+        "feed-menores",
+        10,
+        "No se han podido cargar los casos reales ahora mismo.",
+        feedsMenores
+      );
+    });
   </script>
 </body>
 </html>

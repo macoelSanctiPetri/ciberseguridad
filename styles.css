@@ -8,6 +8,7 @@
   --card: #122c44;
   --border: #1f3a56;
   --shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+  --nav-offset: 110px;
 }
 
 * {
@@ -25,6 +26,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-offset);
 }
 
 a {
@@ -111,6 +113,7 @@ header.hero {
   align-items: center;
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(96, 165, 250, 0.08)), radial-gradient(circle at 10% 20%, rgba(96, 165, 250, 0.25), transparent 35%), radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.2), transparent 30%), var(--panel);
   border-bottom: 1px solid var(--border);
+  scroll-margin-top: var(--nav-offset);
 }
 
 .hero__content h1 {
@@ -259,6 +262,7 @@ main {
 
 .section {
   padding: 2.5rem 0;
+  scroll-margin-top: var(--nav-offset);
 }
 
 .section--highlight {
@@ -731,6 +735,11 @@ main {
   gap: 0.9rem;
 }
 
+.news-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+}
+
 .news-feed li {
   padding: 0.85rem 0.95rem;
   border: 1px solid var(--border);
@@ -755,6 +764,18 @@ main {
   text-decoration: underline;
 }
 
+.news-fallback {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.news-fallback li a {
+  color: var(--accent-2);
+  font-weight: 700;
+}
 .news-meta {
   margin-top: 0.25rem;
   color: var(--muted);
@@ -769,6 +790,10 @@ main {
   margin-top: 0.75rem;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.is-hidden {
+  display: none !important;
 }
 
 .back-to-top {
