@@ -41,11 +41,20 @@ a:hover {
   top: 0;
   z-index: 20;
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
   padding: 0.75rem clamp(1.2rem, 4vw, 2.4rem);
   background: rgba(11, 22, 34, 0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
+}
+
+.top-nav__links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .top-nav a {
@@ -57,6 +66,41 @@ a:hover {
 .top-nav a:hover {
   color: var(--accent);
   text-decoration: none;
+}
+
+.top-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.top-nav__logo {
+  width: 54px;
+  height: auto;
+}
+
+.top-nav__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  font-size: 0.88rem;
+}
+
+.top-nav__text strong {
+  color: var(--accent-2);
+  font-size: 0.95rem;
+}
+
+.top-nav__author {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.badge--nav {
+  margin: 0 0 0 auto;
+  text-align: right;
 }
 
 header.hero {
@@ -134,6 +178,61 @@ header.hero {
   border-radius: 1.2rem;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
+}
+
+.school-brand {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.school-brand img {
+  width: 72px;
+  height: auto;
+}
+
+.school-brand__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.05rem;
+  text-align: left;
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.school-brand__text strong {
+  font-size: 1rem;
+  color: var(--accent-2);
+}
+
+.school-brand__author {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .school-brand {
+    justify-content: flex-start;
+  }
+  .school-brand img {
+    width: 64px;
+  }
+  .top-nav__brand {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
 .pillars-image {
