@@ -19,6 +19,7 @@
     <a href="#glosario">Glosario</a>
     <a href="#guia-ataques">Guía completa ciberataques</a>
     <a href="#enlaces">Enlaces de interés</a>
+    <a href="#novedades">Novedades</a>
   </nav>
   <header class="hero" id="inicio">
     <div class="hero__content">
@@ -824,6 +825,20 @@
         </details>
       </div>
     </section>
+
+    <section class="section" id="novedades">
+      <div class="section__header">
+        <p class="kicker">Actualidad</p>
+        <h2>Novedades de ciberseguridad</h2>
+        <p>Últimos avisos y vulnerabilidades publicados por INCIBE-CERT y CCN-CERT.</p>
+      </div>
+      <div class="card news-card">
+        <div id="feed-ciberseguridad" class="news-feed">
+          <p class="news-loading">Cargando novedades...</p>
+        </div>
+        <p class="news-footnote">Fuente: feeds públicos de INCIBE-CERT y CCN-CERT.</p>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -836,6 +851,83 @@
   </footer>
 
   <a class="back-to-top" href="#inicio" aria-label="Volver arriba">↑</a>
+
+  <script>
+    // Feeds a mostrar
+    const feeds = [
+      "https://www.incibe-cert.es/feed/avisos-seguridad/all",
+      "https://www.incibe.es/incibe-cert/alerta-temprana/avisos-sci/feed",
+      "https://www.ccn-cert.cni.es/component/obrss/rss-ultimas-vulnerabilidades.feed"
+    ];
+
+    const rssToJsonUrl = (feedUrl) =>
+      "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(feedUrl);
+
+    async function cargarFeeds() {
+      const contenedor = document.getElementById("feed-ciberseguridad");
+      if (!contenedor) return;
+
+      try {
+        const todasEntradas = [];
+
+        for (const feed of feeds) {
+          const resp = await fetch(rssToJsonUrl(feed));
+          const data = await resp.json();
+          if (data.items) {
+            data.items.forEach((item) => {
+              todasEntradas.push({
+                titulo: item.title,
+                enlace: item.link,
+                fecha: new Date(item.pubDate || item.pub_date || item.date || Date.now()),
+                origen: data.feed && data.feed.title ? data.feed.title : "Feed",
+              });
+            });
+          }
+        }
+
+        if (!todasEntradas.length) {
+          contenedor.textContent = "No se han podido cargar las novedades en este momento.";
+          return;
+        }
+
+        todasEntradas.sort((a, b) => b.fecha - a.fecha);
+        const ultimas = todasEntradas.slice(0, 10);
+
+        const lista = document.createElement("ul");
+        ultimas.forEach((entrada) => {
+          const li = document.createElement("li");
+
+          const enlace = document.createElement("a");
+          enlace.href = entrada.enlace;
+          enlace.target = "_blank";
+          enlace.rel = "noopener noreferrer";
+          enlace.textContent = entrada.titulo;
+
+          const meta = document.createElement("div");
+          meta.className = "news-meta";
+          const fechaFormato = entrada.fecha.toLocaleDateString("es-ES", {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+          });
+          meta.textContent = `${fechaFormato} · ${entrada.origen}`;
+
+          li.appendChild(enlace);
+          li.appendChild(meta);
+          lista.appendChild(li);
+        });
+
+        contenedor.innerHTML = "";
+        contenedor.appendChild(lista);
+      } catch (err) {
+        console.error(err);
+        const contenedor = document.getElementById("feed-ciberseguridad");
+        if (contenedor) contenedor.textContent = "Ha ocurrido un error al cargar las novedades de ciberseguridad.";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", cargarFeeds);
+  </script>
 </body>
 </html>
 
