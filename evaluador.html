@@ -8,6 +8,8 @@
         :root {
             --primary: #2563eb;
             --success: #16a34a;
+            --danger: #dc2626;
+            --secondary: #64748b;
             --bg: #f8fafc;
             --border: #e2e8f0;
         }
@@ -44,9 +46,16 @@
             margin-bottom: 30px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between; /* Espacio entre select y loading */
             gap: 15px;
             border: 1px solid #bfdbfe;
+        }
+        
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-grow: 1;
         }
 
         select {
@@ -55,6 +64,14 @@
             border-radius: 6px;
             border: 1px solid #cbd5e1;
             cursor: pointer;
+            flex-grow: 1;
+            max-width: 300px;
+        }
+
+        #loadingIndicator {
+            color: var(--primary);
+            font-weight: bold;
+            display: none; /* Oculto por defecto */
         }
 
         /* Tabla Rúbrica */
@@ -117,29 +134,38 @@
             border-radius: 6px;
         }
 
-        /* Botón Guardar */
-        .btn-save {
-            display: block;
-            width: 100%;
+        /* Botonera inferior */
+        .actions-panel {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
             padding: 15px;
-            background-color: var(--success);
-            color: white;
             border: none;
             border-radius: 8px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.2s;
+            flex: 1;
         }
 
-        .btn-save:hover {
-            background-color: #15803d;
+        .btn-save {
+            background-color: var(--success);
+            color: white;
+            flex: 2; /* Más grande */
         }
+        .btn-save:hover { background-color: #15803d; }
+        .btn-save:disabled { background-color: #cbd5e1; cursor: not-allowed; }
 
-        .btn-save:disabled {
-            background-color: #cbd5e1;
-            cursor: not-allowed;
+        .btn-clear {
+            background-color: var(--secondary);
+            color: white;
+            flex: 1;
         }
+        .btn-clear:hover { background-color: #475569; }
 
         /* Mensajes */
         #statusMessage {
@@ -162,16 +188,19 @@
 
     <!-- Panel de Selección -->
     <div class="control-panel">
-        <label for="grupoSelect"><strong>Seleccionar Grupo:</strong></label>
-        <select id="grupoSelect">
-            <option value="" disabled selected>-- Elige un grupo --</option>
-            <option value="GRUPO1">GRUPO 1</option>
-            <option value="GRUPO2">GRUPO 2</option>
-            <option value="GRUPO3">GRUPO 3</option>
-            <option value="GRUPO4">GRUPO 4</option>
-            <option value="GRUPO5">GRUPO 5</option>
-            <option value="GRUPO6">GRUPO 6</option>
-        </select>
+        <div class="control-group">
+            <label for="grupoSelect"><strong>Grupo:</strong></label>
+            <select id="grupoSelect" onchange="cargarDatosGrupo()">
+                <option value="" disabled selected>-- Elige un grupo --</option>
+                <option value="GRUPO1">GRUPO 1</option>
+                <option value="GRUPO2">GRUPO 2</option>
+                <option value="GRUPO3">GRUPO 3</option>
+                <option value="GRUPO4">GRUPO 4</option>
+                <option value="GRUPO5">GRUPO 5</option>
+                <option value="GRUPO6">GRUPO 6</option>
+            </select>
+        </div>
+        <div id="loadingIndicator">🔄 Cargando notas...</div>
     </div>
 
     <!-- RÚBRICA 1: TRABAJO ESCRITO (Filas 2, 3, 4 en Excel) -->
@@ -213,7 +242,7 @@
                 <!-- ÍTEM 3 (Fila 4) -->
                 <tr class="fila-evaluacion" data-index="2">
                     <td>Análisis del Caso Real</td>
-                    <td class="col-desc">El caso es relevante, está bien explicado y se conecta de forma crítica con la teoría, demostrando comprensión. (Este es un requisito esencial y debe ocupar el 30% del tiempo de preparación)</td>
+                    <td class="col-desc">El caso es relevante, está bien explicado y se conecta de forma crítica con la teoría, demostrando comprensión.</td>
                     <td class="score-cell" onclick="selectScore(2, 1)">1</td>
                     <td class="score-cell" onclick="selectScore(2, 2)">2</td>
                     <td class="score-cell" onclick="selectScore(2, 3)">3</td>
@@ -249,7 +278,7 @@
                 <!-- ÍTEM 5 (Fila 8) -->
                 <tr class="fila-evaluacion" data-index="4">
                     <td>Comunicación Oral</td>
-                    <td class="col-desc">El equipo se expresa con fluidez y confianza. El tiempo está bien distribuido (máximo 10 minutos) y todos los miembros participan (la participación es obligatoria)</td>
+                    <td class="col-desc">El equipo se expresa con fluidez y confianza. El tiempo está bien distribuido y todos participan.</td>
                     <td class="score-cell" onclick="selectScore(4, 1)">1</td>
                     <td class="score-cell" onclick="selectScore(4, 2)">2</td>
                     <td class="score-cell" onclick="selectScore(4, 3)">3</td>
@@ -259,7 +288,7 @@
                 <!-- ÍTEM 6 (Fila 9) -->
                 <tr class="fila-evaluacion" data-index="5">
                     <td>Recursos Visuales</td>
-                    <td class="col-desc">El material de apoyo (diapositivas, etc.) es visualmente atractivo, claro y refuerza el mensaje en lugar de distraer</td>
+                    <td class="col-desc">El material de apoyo (diapositivas, etc.) es visualmente atractivo, claro y refuerza el mensaje.</td>
                     <td class="score-cell" onclick="selectScore(5, 1)">1</td>
                     <td class="score-cell" onclick="selectScore(5, 2)">2</td>
                     <td class="score-cell" onclick="selectScore(5, 3)">3</td>
@@ -270,99 +299,139 @@
         </table>
     </div>
 
-    <button id="btnGuardar" class="btn-save" onclick="enviarDatos()">Guardar Evaluación</button>
+    <div class="actions-panel">
+        <button class="btn btn-clear" onclick="limpiarFormulario()">Limpiar Selección</button>
+        <button id="btnGuardar" class="btn btn-save" onclick="enviarDatos()">Guardar / Actualizar Evaluación</button>
+    </div>
     <div id="statusMessage"></div>
 
 </div>
 
 <script>
     // ==========================================
-    // CONFIGURACIÓN
+    // CONFIGURACIÓN - PEGA TU NUEVA URL AQUÍ
     // ==========================================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxiSOXFtNvL571G1G1q4ZMBxlB1QoQvAvIfYdHaXwklOtuLNSnT79hImLezV8wTlSal/exec"; 
+    const SCRIPT_URL = "PEGAR_AQUI_TU_NUEVA_URL_DE_APPS_SCRIPT"; 
     
-    // Estado de la aplicación: Almacena las 6 notas (inicializadas a null)
-    // Índices 0-2: Rúbrica 1. Índices 3-5: Rúbrica 2.
+    // Estado de la aplicación
     let valoraciones = [null, null, null, null, null, null];
 
-    /**
-     * Función que se ejecuta al hacer clic en una celda de puntuación
-     * @param {number} filaIndex - Índice de la fila (0 a 5)
-     * @param {number} valor - Puntuación seleccionada (1 a 5)
-     */
+    // Función para marcar celda
     function selectScore(filaIndex, valor) {
-        // 1. Guardar el valor en el array
         valoraciones[filaIndex] = valor;
-
-        // 2. Actualizar la interfaz visual
-        // Buscamos todas las celdas de esa fila específica
-        const fila = document.querySelector(`tr[data-index="${filaIndex}"]`);
-        const celdas = fila.querySelectorAll('.score-cell');
-
-        // Quitamos la clase 'selected' de todas
-        celdas.forEach(c => c.classList.remove('selected'));
-
-        // Añadimos 'selected' a la celda clicada (la celda con valor - 1 es el índice)
-        celdas[valor - 1].classList.add('selected');
+        actualizarUI();
     }
 
-    /**
-     * Función para enviar los datos a Google Sheets
-     */
+    // Función que pinta la tabla según el array 'valoraciones'
+    function actualizarUI() {
+        // Limpiamos todo primero
+        document.querySelectorAll('.score-cell').forEach(c => c.classList.remove('selected'));
+
+        // Re-aplicamos las clases
+        valoraciones.forEach((valor, index) => {
+            if (valor !== null) {
+                const fila = document.querySelector(`tr[data-index="${index}"]`);
+                if(fila) {
+                    const celda = fila.querySelectorAll('.score-cell')[valor - 1];
+                    if(celda) celda.classList.add('selected');
+                }
+            }
+        });
+    }
+
+    // Limpia el formulario (reseteo local)
+    function limpiarFormulario() {
+        valoraciones = [null, null, null, null, null, null];
+        actualizarUI();
+        document.getElementById('statusMessage').textContent = "🧹 Formulario limpio (no guardado en Excel aún).";
+        document.getElementById('statusMessage').style.color = "#64748b";
+    }
+
+    // Carga los datos del grupo seleccionado
+    function cargarDatosGrupo() {
+        const grupo = document.getElementById('grupoSelect').value;
+        const loader = document.getElementById('loadingIndicator');
+        const msg = document.getElementById('statusMessage');
+
+        if (!grupo) return;
+
+        // Reset visual antes de cargar
+        limpiarFormulario();
+        msg.textContent = "";
+        
+        loader.style.display = "block";
+
+        // Petición GET para leer datos
+        // Nota: fetch sin 'no-cors' permite leer la respuesta JSON
+        fetch(`${SCRIPT_URL}?grupo=${grupo}`)
+            .then(response => response.json())
+            .then(data => {
+                loader.style.display = "none";
+                if (data.status === 'success') {
+                    // Actualizamos el array con lo que viene del Excel
+                    // Si viene null (no evaluado), se queda null
+                    valoraciones = data.data;
+                    actualizarUI();
+                    
+                    // Comprobar si está vacía
+                    const hayDatos = valoraciones.some(v => v !== null);
+                    if(hayDatos) {
+                        msg.textContent = "✅ Notas cargadas desde la hoja.";
+                        msg.style.color = "green";
+                    } else {
+                        msg.textContent = "ℹ️ Este grupo aún no tiene evaluación.";
+                        msg.style.color = "#2563eb";
+                    }
+                } else {
+                    msg.textContent = "❌ Error leyendo datos: " + data.message;
+                    msg.style.color = "red";
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                loader.style.display = "none";
+                msg.textContent = "❌ Error de conexión al cargar.";
+                msg.style.color = "red";
+            });
+    }
+
+    // Guardar datos
     function enviarDatos() {
         const grupo = document.getElementById('grupoSelect').value;
         const btn = document.getElementById('btnGuardar');
         const msg = document.getElementById('statusMessage');
 
-        // Validaciones
         if (!grupo) {
-            msg.textContent = "⚠️ Por favor, selecciona un grupo.";
+            msg.textContent = "⚠️ Selecciona un grupo.";
             msg.style.color = "red";
             return;
         }
-
         if (valoraciones.includes(null)) {
-            msg.textContent = "⚠️ Debes evaluar todos los criterios antes de guardar.";
+            msg.textContent = "⚠️ Faltan campos por evaluar.";
             msg.style.color = "red";
             return;
         }
 
-        // Preparar envío
         btn.disabled = true;
         btn.textContent = "Guardando...";
         msg.textContent = "";
 
-        // Enviar Petición
         fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // Importante para Google Apps Script
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                grupo: grupo,
-                valoraciones: valoraciones
-            })
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ grupo: grupo, valoraciones: valoraciones })
         })
         .then(() => {
-            // Como usamos no-cors, asumimos éxito si no hay error de red
-            msg.textContent = "✅ ¡Guardado con éxito en " + grupo + "!";
+            msg.textContent = "✅ Guardado correctamente.";
             msg.style.color = "green";
-            
-            // Reiniciar formulario opcionalmente
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.textContent = "Guardar Evaluación";
-                // Limpiar selección visual si quisieras evaluar otro grupo inmediatamente
-                // limpiarFormulario(); 
-            }, 2000);
+            btn.disabled = false;
+            btn.textContent = "Guardar / Actualizar Evaluación";
         })
         .catch(error => {
-            console.error('Error:', error);
-            msg.textContent = "❌ Error al conectar con el servidor.";
+            msg.textContent = "❌ Error al guardar.";
             msg.style.color = "red";
             btn.disabled = false;
-            btn.textContent = "Reintentar";
         });
     }
 </script>
