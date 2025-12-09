@@ -24,7 +24,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px; /* Hacemos el contenedor más ancho para que quepan los comentarios */
             margin: 0 auto;
             background: white;
             padding: 30px;
@@ -32,153 +32,67 @@
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
 
-        h1 {
-            text-align: center;
-            color: var(--primary);
-            margin-bottom: 30px;
-        }
+        h1 { text-align: center; color: var(--primary); margin-bottom: 30px; }
 
-        /* Selector de Grupo */
+        /* Selector */
         .control-panel {
-            background: #eff6ff;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between; /* Espacio entre select y loading */
-            gap: 15px;
-            border: 1px solid #bfdbfe;
+            background: #eff6ff; padding: 20px; border-radius: 8px; margin-bottom: 30px;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 15px; border: 1px solid #bfdbfe;
         }
+        select { padding: 10px 20px; font-size: 16px; border-radius: 6px; border: 1px solid #cbd5e1; cursor: pointer; flex-grow: 1; max-width: 300px; }
+        #loadingIndicator { color: var(--primary); font-weight: bold; display: none; }
+
+        /* Tablas */
+        .rubrica-section { margin-bottom: 40px; }
+        .section-title { background: #f1f5f9; padding: 10px 15px; border-left: 5px solid var(--primary); margin-bottom: 15px; font-weight: bold; font-size: 1.1em; }
         
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-grow: 1;
-        }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th { background: #f8fafc; padding: 12px; text-align: center; border-bottom: 2px solid var(--border); color: #64748b; font-weight: 600; }
+        td { padding: 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
 
-        select {
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-            cursor: pointer;
-            flex-grow: 1;
-            max-width: 300px;
-        }
+        .col-criterio { width: 15%; font-weight: 600; }
+        .col-desc { width: 25%; font-size: 0.9em; color: #475569; padding-right: 15px; }
+        .col-notas { width: 5%; text-align: center; }
+        .col-comentarios { width: 25%; }
 
-        #loadingIndicator {
-            color: var(--primary);
-            font-weight: bold;
-            display: none; /* Oculto por defecto */
-        }
-
-        /* Tabla Rúbrica */
-        .rubrica-section {
-            margin-bottom: 40px;
-        }
-        
-        .section-title {
-            background: #f1f5f9;
-            padding: 10px 15px;
-            border-left: 5px solid var(--primary);
-            margin-bottom: 15px;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        th {
-            background: #f8fafc;
-            padding: 12px;
-            text-align: center;
-            border-bottom: 2px solid var(--border);
-            color: #64748b;
-            font-weight: 600;
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .col-criterio { width: 20%; font-weight: 600; }
-        .col-desc { width: 30%; font-size: 0.9em; color: #475569; }
-        
-        /* Celdas de puntuación */
+        /* Celdas Puntuación */
         .score-cell {
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            width: 10%;
-            font-weight: bold;
-            color: #94a3b8;
+            text-align: center; cursor: pointer; transition: all 0.2s;
+            font-weight: bold; color: #94a3b8; border-left: 1px solid #f1f5f9;
         }
-
-        .score-cell:hover {
-            background-color: #f0f9ff;
-        }
-
-        /* Estilo cuando está seleccionado */
+        .score-cell:hover { background-color: #f0f9ff; color: var(--primary); }
         .selected {
-            background-color: var(--primary) !important;
-            color: white !important;
-            transform: scale(1.05);
-            box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+            background-color: var(--primary) !important; color: white !important;
+            transform: scale(1.05); box-shadow: 0 2px 4px rgb(0 0 0 / 0.1); border-radius: 6px;
+        }
+
+        /* Comentarios Input */
+        textarea.comment-box {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
             border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9em;
+            resize: vertical; /* Solo permite redimensionar hacia abajo */
+            min-height: 40px;
+        }
+        textarea.comment-box:focus {
+            outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
         }
 
-        /* Botonera inferior */
-        .actions-panel {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-            flex: 1;
-        }
-
-        .btn-save {
-            background-color: var(--success);
-            color: white;
-            flex: 2; /* Más grande */
-        }
+        /* Botones */
+        .actions-panel { display: flex; gap: 15px; margin-top: 20px; }
+        .btn { padding: 15px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; flex: 1; }
+        .btn-save { background-color: var(--success); color: white; flex: 2; }
         .btn-save:hover { background-color: #15803d; }
         .btn-save:disabled { background-color: #cbd5e1; cursor: not-allowed; }
-
-        .btn-clear {
-            background-color: var(--secondary);
-            color: white;
-            flex: 1;
-        }
+        .btn-clear { background-color: var(--secondary); color: white; flex: 1; }
         .btn-clear:hover { background-color: #475569; }
 
-        /* Mensajes */
-        #statusMessage {
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
-            min-height: 24px;
-        }
-
-        .header-scores th {
-            font-size: 0.8em;
-            text-transform: uppercase;
-        }
+        #statusMessage { text-align: center; margin-top: 15px; font-weight: bold; min-height: 24px; padding: 10px; border-radius: 6px; }
+        .header-scores th { font-size: 0.8em; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -186,9 +100,8 @@
 <div class="container">
     <h1>Evaluación de Ciberseguridad</h1>
 
-    <!-- Panel de Selección -->
     <div class="control-panel">
-        <div class="control-group">
+        <div style="display:flex; align-items:center; gap:10px; flex-grow:1;">
             <label for="grupoSelect"><strong>Grupo:</strong></label>
             <select id="grupoSelect" onchange="cargarDatosGrupo()">
                 <option value="" disabled selected>-- Elige un grupo --</option>
@@ -200,10 +113,10 @@
                 <option value="GRUPO6">GRUPO 6</option>
             </select>
         </div>
-        <div id="loadingIndicator">🔄 Cargando notas...</div>
+        <div id="loadingIndicator">🔄 Cargando...</div>
     </div>
 
-    <!-- RÚBRICA 1: TRABAJO ESCRITO (Filas 2, 3, 4 en Excel) -->
+    <!-- RÚBRICA 1 -->
     <div class="rubrica-section">
         <div class="section-title">PARTE 1: TRABAJO ESCRITO</div>
         <table>
@@ -211,49 +124,51 @@
                 <tr class="header-scores">
                     <th class="col-criterio">Criterio</th>
                     <th class="col-desc">Descripción</th>
-                    <th>1<br><small>Muy Mal</small></th>
-                    <th>2<br><small>Mal</small></th>
-                    <th>3<br><small>Regular</small></th>
-                    <th>4<br><small>Bien</small></th>
-                    <th>5<br><small>Muy Bien</small></th>
+                    <th class="col-notas">1<br><small>Muy Mal</small></th>
+                    <th class="col-notas">2<br><small>Mal</small></th>
+                    <th class="col-notas">3<br><small>Regular</small></th>
+                    <th class="col-notas">4<br><small>Bien</small></th>
+                    <th class="col-notas">5<br><small>Muy Bien</small></th>
+                    <th class="col-comentarios">Comentarios</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- ÍTEM 1 (Fila 2) -->
+                <!-- Items 0, 1, 2 -->
                 <tr class="fila-evaluacion" data-index="0">
-                    <td>Dominio del Tema</td>
-                    <td class="col-desc">Demuestra un entendimiento completo y profundo de todos los conceptos asignados, usando la terminología correcta</td>
+                    <td>Dominio</td>
+                    <td class="col-desc">Comprensión profunda y terminología correcta.</td>
                     <td class="score-cell" onclick="selectScore(0, 1)">1</td>
                     <td class="score-cell" onclick="selectScore(0, 2)">2</td>
                     <td class="score-cell" onclick="selectScore(0, 3)">3</td>
                     <td class="score-cell" onclick="selectScore(0, 4)">4</td>
                     <td class="score-cell" onclick="selectScore(0, 5)">5</td>
+                    <td><textarea class="comment-box" placeholder="Opcional..." oninput="guardarComentario(0, this.value)"></textarea></td>
                 </tr>
-                <!-- ÍTEM 2 (Fila 3) -->
                 <tr class="fila-evaluacion" data-index="1">
-                    <td>Investigación y Uso de Fuentes</td>
-                    <td class="col-desc">Integra de forma eficaz la web de la asignatura y los recursos externos recomendados para enriquecer el análisis.</td>
+                    <td>Fuentes</td>
+                    <td class="col-desc">Uso eficaz de recursos externos y web de la asignatura.</td>
                     <td class="score-cell" onclick="selectScore(1, 1)">1</td>
                     <td class="score-cell" onclick="selectScore(1, 2)">2</td>
                     <td class="score-cell" onclick="selectScore(1, 3)">3</td>
                     <td class="score-cell" onclick="selectScore(1, 4)">4</td>
                     <td class="score-cell" onclick="selectScore(1, 5)">5</td>
+                    <td><textarea class="comment-box" placeholder="Opcional..." oninput="guardarComentario(1, this.value)"></textarea></td>
                 </tr>
-                <!-- ÍTEM 3 (Fila 4) -->
                 <tr class="fila-evaluacion" data-index="2">
-                    <td>Análisis del Caso Real</td>
-                    <td class="col-desc">El caso es relevante, está bien explicado y se conecta de forma crítica con la teoría, demostrando comprensión.</td>
+                    <td>Análisis</td>
+                    <td class="col-desc">Caso relevante conectado críticamente con la teoría.</td>
                     <td class="score-cell" onclick="selectScore(2, 1)">1</td>
                     <td class="score-cell" onclick="selectScore(2, 2)">2</td>
                     <td class="score-cell" onclick="selectScore(2, 3)">3</td>
                     <td class="score-cell" onclick="selectScore(2, 4)">4</td>
                     <td class="score-cell" onclick="selectScore(2, 5)">5</td>
+                    <td><textarea class="comment-box" placeholder="Opcional..." oninput="guardarComentario(2, this.value)"></textarea></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- RÚBRICA 2: EXPOSICIÓN (Filas 7, 8, 9 en Excel) -->
+    <!-- RÚBRICA 2 -->
     <div class="rubrica-section">
         <div class="section-title">PARTE 2: EXPOSICIÓN ORAL</div>
         <table>
@@ -261,74 +176,79 @@
                 <tr class="header-scores">
                     <th class="col-criterio">Criterio</th>
                     <th class="col-desc">Descripción</th>
-                    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                    <th class="col-notas">1</th><th class="col-notas">2</th><th class="col-notas">3</th><th class="col-notas">4</th><th class="col-notas">5</th>
+                    <th class="col-comentarios">Comentarios</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- ÍTEM 4 (Fila 7) -->
+                <!-- Items 3, 4, 5 -->
                 <tr class="fila-evaluacion" data-index="3">
-                    <td>Claridad y Estructura</td>
-                    <td class="col-desc">La exposición es lógica, clara y fácil de seguir para la audiencia, sin divagaciones</td>
+                    <td>Claridad</td>
+                    <td class="col-desc">Lógica, clara y fácil de seguir.</td>
                     <td class="score-cell" onclick="selectScore(3, 1)">1</td>
                     <td class="score-cell" onclick="selectScore(3, 2)">2</td>
                     <td class="score-cell" onclick="selectScore(3, 3)">3</td>
                     <td class="score-cell" onclick="selectScore(3, 4)">4</td>
                     <td class="score-cell" onclick="selectScore(3, 5)">5</td>
+                    <td><textarea class="comment-box" placeholder="Opcional..." oninput="guardarComentario(3, this.value)"></textarea></td>
                 </tr>
-                <!-- ÍTEM 5 (Fila 8) -->
                 <tr class="fila-evaluacion" data-index="4">
-                    <td>Comunicación Oral</td>
-                    <td class="col-desc">El equipo se expresa con fluidez y confianza. El tiempo está bien distribuido y todos participan.</td>
+                    <td>Comunicación</td>
+                    <td class="col-desc">Fluidez, confianza y participación equitativa.</td>
                     <td class="score-cell" onclick="selectScore(4, 1)">1</td>
                     <td class="score-cell" onclick="selectScore(4, 2)">2</td>
                     <td class="score-cell" onclick="selectScore(4, 3)">3</td>
                     <td class="score-cell" onclick="selectScore(4, 4)">4</td>
                     <td class="score-cell" onclick="selectScore(4, 5)">5</td>
+                    <td><textarea class="comment-box" placeholder="Opcional..." oninput="guardarComentario(4, this.value)"></textarea></td>
                 </tr>
-                <!-- ÍTEM 6 (Fila 9) -->
                 <tr class="fila-evaluacion" data-index="5">
-                    <td>Recursos Visuales</td>
-                    <td class="col-desc">El material de apoyo (diapositivas, etc.) es visualmente atractivo, claro y refuerza el mensaje.</td>
+                    <td>Recursos</td>
+                    <td class="col-desc">Material visual atractivo y claro.</td>
                     <td class="score-cell" onclick="selectScore(5, 1)">1</td>
                     <td class="score-cell" onclick="selectScore(5, 2)">2</td>
                     <td class="score-cell" onclick="selectScore(5, 3)">3</td>
                     <td class="score-cell" onclick="selectScore(5, 4)">4</td>
                     <td class="score-cell" onclick="selectScore(5, 5)">5</td>
+                    <td><textarea class="comment-box" placeholder="Opcional..." oninput="guardarComentario(5, this.value)"></textarea></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <div class="actions-panel">
-        <button class="btn btn-clear" onclick="limpiarFormulario()">Limpiar Selección</button>
-        <button id="btnGuardar" class="btn btn-save" onclick="enviarDatos()">Guardar / Actualizar Evaluación</button>
+        <button class="btn btn-clear" onclick="limpiarFormulario()">Limpiar Todo</button>
+        <button id="btnGuardar" class="btn btn-save" onclick="enviarDatos()">Guardar Notas y Comentarios</button>
     </div>
     <div id="statusMessage"></div>
-
 </div>
 
 <script>
     // ==========================================
-    // CONFIGURACIÓN - PEGA TU NUEVA URL AQUÍ
+    // CONFIGURACIÓN: PEGA AQUÍ TU URL
     // ==========================================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyU-AK2GlydBJpHmYix8j5l-JuRUz1XOuViIJNufHNxB9_-tc-QkV_eS49fTp1oE3c4/exec"; 
-    
-    // Estado de la aplicación
-    let valoraciones = [null, null, null, null, null, null];
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbygOGXSgWvs-2LFu0n5f9eNbEnzt5SWEFGBRhJiTftwo6VD-CDH4fL8t-9rh4RI9KQL/exec"; 
 
-    // Función para marcar celda
-    function selectScore(filaIndex, valor) {
-        valoraciones[filaIndex] = valor;
-        actualizarUI();
+    // Estado: guardamos notas Y comentarios
+    let estado = {
+        valoraciones: [null, null, null, null, null, null],
+        comentarios: ["", "", "", "", "", ""]
+    };
+
+    function selectScore(index, valor) {
+        estado.valoraciones[index] = valor;
+        renderizarUI();
     }
 
-    // Función que pinta la tabla según el array 'valoraciones'
-    function actualizarUI() {
-        // Limpiamos todo primero
-        document.querySelectorAll('.score-cell').forEach(c => c.classList.remove('selected'));
+    function guardarComentario(index, texto) {
+        estado.comentarios[index] = texto;
+        // No hace falta renderizar toda la UI al escribir texto
+    }
 
-        // Re-aplicamos las clases
-        valoraciones.forEach((valor, index) => {
+    function renderizarUI() {
+        // 1. Pintar Celdas
+        document.querySelectorAll('.score-cell').forEach(c => c.classList.remove('selected'));
+        estado.valoraciones.forEach((valor, index) => {
             if (valor !== null) {
                 const fila = document.querySelector(`tr[data-index="${index}"]`);
                 if(fila) {
@@ -337,102 +257,110 @@
                 }
             }
         });
+
+        // 2. Pintar Comentarios (Solo necesario al cargar datos o limpiar)
+        estado.comentarios.forEach((texto, index) => {
+            const fila = document.querySelector(`tr[data-index="${index}"]`);
+            if(fila) {
+                const area = fila.querySelector('textarea');
+                if(area.value !== texto) area.value = texto; // Evita sobrescribir si el usuario está escribiendo
+            }
+        });
     }
 
-    // Limpia el formulario (reseteo local)
     function limpiarFormulario() {
-        valoraciones = [null, null, null, null, null, null];
-        actualizarUI();
-        document.getElementById('statusMessage').textContent = "🧹 Formulario limpio (no guardado en Excel aún).";
-        document.getElementById('statusMessage').style.color = "#64748b";
+        estado.valoraciones = [null, null, null, null, null, null];
+        estado.comentarios = ["", "", "", "", "", ""];
+        // Forzamos vaciado de textareas visualmente
+        document.querySelectorAll('textarea').forEach(t => t.value = "");
+        renderizarUI();
+        msg("🧹 Formulario limpio.", "#64748b");
     }
 
-    // Carga los datos del grupo seleccionado
     function cargarDatosGrupo() {
         const grupo = document.getElementById('grupoSelect').value;
         const loader = document.getElementById('loadingIndicator');
-        const msg = document.getElementById('statusMessage');
+        const btn = document.getElementById('btnGuardar');
 
         if (!grupo) return;
-
-        // Reset visual antes de cargar
-        limpiarFormulario();
-        msg.textContent = "";
         
+        limpiarFormulario(); // Resetea visuales
+        msg("", "black");
         loader.style.display = "block";
+        btn.disabled = true;
 
-        // Petición GET para leer datos
-        // Nota: fetch sin 'no-cors' permite leer la respuesta JSON
         fetch(`${SCRIPT_URL}?grupo=${grupo}`)
-            .then(response => response.json())
-            .then(data => {
+            .then(r => r.json())
+            .then(res => {
                 loader.style.display = "none";
-                if (data.status === 'success') {
-                    // Actualizamos el array con lo que viene del Excel
-                    // Si viene null (no evaluado), se queda null
-                    valoraciones = data.data;
-                    actualizarUI();
+                btn.disabled = false;
+
+                if (res.status === 'success') {
+                    // Ahora la respuesta tiene { valoraciones: [], comentarios: [] }
+                    estado.valoraciones = res.data.valoraciones;
+                    estado.comentarios = res.data.comentarios;
                     
-                    // Comprobar si está vacía
-                    const hayDatos = valoraciones.some(v => v !== null);
-                    if(hayDatos) {
-                        msg.textContent = "✅ Notas cargadas desde la hoja.";
-                        msg.style.color = "green";
-                    } else {
-                        msg.textContent = "ℹ️ Este grupo aún no tiene evaluación.";
-                        msg.style.color = "#2563eb";
-                    }
+                    // Actualizamos inputs visualmente
+                    renderizarUI(); 
+                    
+                    // Forzar actualización de textareas explícitamente tras cargar
+                    estado.comentarios.forEach((txt, idx) => {
+                         const f = document.querySelector(`tr[data-index="${idx}"] textarea`);
+                         if(f) f.value = txt || "";
+                    });
+
+                    const hayDatos = estado.valoraciones.some(v => v !== null);
+                    msg(hayDatos ? "✅ Datos cargados." : "ℹ️ Grupo sin evaluar.", hayDatos ? "green" : "#2563eb");
                 } else {
-                    msg.textContent = "❌ Error leyendo datos: " + data.message;
-                    msg.style.color = "red";
+                    msg("⚠️ Error: " + res.message, "red");
                 }
             })
-            .catch(error => {
-                console.error(error);
+            .catch(e => {
                 loader.style.display = "none";
-                msg.textContent = "❌ Error de conexión al cargar.";
-                msg.style.color = "red";
+                btn.disabled = false;
+                msg("❌ Error de conexión.", "red");
             });
     }
 
-    // Guardar datos
     function enviarDatos() {
         const grupo = document.getElementById('grupoSelect').value;
         const btn = document.getElementById('btnGuardar');
-        const msg = document.getElementById('statusMessage');
 
-        if (!grupo) {
-            msg.textContent = "⚠️ Selecciona un grupo.";
-            msg.style.color = "red";
-            return;
-        }
-        if (valoraciones.includes(null)) {
-            msg.textContent = "⚠️ Faltan campos por evaluar.";
-            msg.style.color = "red";
-            return;
-        }
+        if (!grupo) return msg("⚠️ Selecciona un grupo.", "red");
+        
+        // Enviamos TODO el estado (notas y comentarios)
+        const payload = {
+            grupo: grupo,
+            valoraciones: estado.valoraciones,
+            comentarios: estado.comentarios
+        };
 
         btn.disabled = true;
         btn.textContent = "Guardando...";
-        msg.textContent = "";
+        msg("⏳ Guardando...", "black");
 
         fetch(SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ grupo: grupo, valoraciones: valoraciones })
+            body: JSON.stringify(payload)
         })
         .then(() => {
-            msg.textContent = "✅ Guardado correctamente.";
-            msg.style.color = "green";
+            msg("✅ ¡Guardado con comentarios!", "green");
             btn.disabled = false;
-            btn.textContent = "Guardar / Actualizar Evaluación";
+            btn.textContent = "Guardar Notas y Comentarios";
         })
-        .catch(error => {
-            msg.textContent = "❌ Error al guardar.";
-            msg.style.color = "red";
+        .catch(e => {
+            msg("❌ Error al guardar.", "red");
             btn.disabled = false;
         });
+    }
+
+    function msg(txt, color) {
+        const m = document.getElementById('statusMessage');
+        m.textContent = txt;
+        m.style.color = color;
+        m.style.backgroundColor = color === 'red' ? '#fee2e2' : 'transparent';
     }
 </script>
 
