@@ -91,7 +91,7 @@
         .btn-clear { background-color: var(--secondary); color: white; flex: 1; }
         .btn-clear:hover { background-color: #475569; }
 
-        #statusMessage { text-align: center; margin-top: 15px; font-weight: bold; min-height: 24px; padding: 10px; border-radius: 6px; }
+        #statusMessage { text-align: center; margin-top: 15px; font-weight: bold; min-height: 24px; padding: 10px; border-radius: 6px; white-space: pre-line; }
         .header-scores th { font-size: 0.8em; text-transform: uppercase; }
     </style>
 </head>
@@ -225,9 +225,9 @@
 
 <script>
     // ==========================================
-    // CONFIGURACIÓN: PEGA AQUÍ TU URL
+    // CONFIGURACIÓN: PEGA TU NUEVA URL AQUÍ
     // ==========================================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbygOGXSgWvs-2LFu0n5f9eNbEnzt5SWEFGBRhJiTftwo6VD-CDH4fL8t-9rh4RI9KQL/exec"; 
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzLCHrCXsk8IV3UHGmQnJnV1srLiPt6KnS9TVGmnolERWEh8zF-X2IqC4KWGNJcabg/exec"; 
 
     // Estado: guardamos notas Y comentarios
     let estado = {
@@ -236,42 +236,51 @@
     };
 
     function selectScore(index, valor) {
+        if (!estado.valoraciones) estado.valoraciones = [null, null, null, null, null, null];
         estado.valoraciones[index] = valor;
         renderizarUI();
     }
 
     function guardarComentario(index, texto) {
+        if (!estado.comentarios) estado.comentarios = ["", "", "", "", "", ""];
         estado.comentarios[index] = texto;
-        // No hace falta renderizar toda la UI al escribir texto
     }
 
     function renderizarUI() {
+        // Validación de seguridad para evitar bloqueos si los datos están corruptos
+        if (!estado.valoraciones) return;
+
         // 1. Pintar Celdas
         document.querySelectorAll('.score-cell').forEach(c => c.classList.remove('selected'));
         estado.valoraciones.forEach((valor, index) => {
             if (valor !== null) {
                 const fila = document.querySelector(`tr[data-index="${index}"]`);
                 if(fila) {
-                    const celda = fila.querySelectorAll('.score-cell')[valor - 1];
-                    if(celda) celda.classList.add('selected');
+                    // Verificamos que la celda exista antes de acceder
+                    const celdas = fila.querySelectorAll('.score-cell');
+                    if (celdas[valor - 1]) {
+                        celdas[valor - 1].classList.add('selected');
+                    }
                 }
             }
         });
 
-        // 2. Pintar Comentarios (Solo necesario al cargar datos o limpiar)
-        estado.comentarios.forEach((texto, index) => {
-            const fila = document.querySelector(`tr[data-index="${index}"]`);
-            if(fila) {
-                const area = fila.querySelector('textarea');
-                if(area.value !== texto) area.value = texto; // Evita sobrescribir si el usuario está escribiendo
-            }
-        });
+        // 2. Pintar Comentarios (Solo si existen)
+        if (estado.comentarios && Array.isArray(estado.comentarios)) {
+            estado.comentarios.forEach((texto, index) => {
+                const fila = document.querySelector(`tr[data-index="${index}"]`);
+                if(fila) {
+                    const area = fila.querySelector('textarea');
+                    // Solo actualizamos si es diferente para no interrumpir escritura
+                    if(area && area.value !== texto) area.value = texto; 
+                }
+            });
+        }
     }
 
     function limpiarFormulario() {
         estado.valoraciones = [null, null, null, null, null, null];
         estado.comentarios = ["", "", "", "", "", ""];
-        // Forzamos vaciado de textareas visualmente
         document.querySelectorAll('textarea').forEach(t => t.value = "");
         renderizarUI();
         msg("🧹 Formulario limpio.", "#64748b");
@@ -290,35 +299,55 @@
         btn.disabled = true;
 
         fetch(`${SCRIPT_URL}?grupo=${grupo}`)
-            .then(r => r.json())
+            .then(r => {
+                // Chequeo de seguridad por si devuelve HTML de login
+                const type = r.headers.get("content-type");
+                if (type && type.indexOf("application/json") === -1) {
+                    throw new Error("PROBLEMA DE PERMISOS:\nGoogle pide iniciar sesión.\n\nSOLUCIÓN: En Apps Script, dale a 'Implementar' > 'Nueva implementación' y selecciona 'Quién tiene acceso: Cualquier persona'.");
+                }
+                return r.json();
+            })
             .then(res => {
                 loader.style.display = "none";
                 btn.disabled = false;
 
                 if (res.status === 'success') {
-                    // Ahora la respuesta tiene { valoraciones: [], comentarios: [] }
-                    estado.valoraciones = res.data.valoraciones;
-                    estado.comentarios = res.data.comentarios;
+                    // BLINDAJE: Detectamos si es la versión vieja o nueva del script
+                    if (Array.isArray(res.data)) {
+                        // Backend viejo (solo devolvía array de notas)
+                        estado.valoraciones = res.data;
+                        estado.comentarios = ["", "", "", "", "", ""];
+                        msg("⚠️ AVISO: Tu script de Google es antiguo (v2). Se cargan notas pero no comentarios.\nActualiza el script a v3.", "#d97706");
+                    } else if (res.data && res.data.valoraciones) {
+                        // Backend nuevo (v3)
+                        estado.valoraciones = res.data.valoraciones;
+                        estado.comentarios = res.data.comentarios || ["", "", "", "", "", ""];
+                        
+                        const hayDatos = estado.valoraciones.some(v => v !== null);
+                        if (hayDatos) {
+                            msg("✅ Notas y comentarios cargados.", "green");
+                        } else {
+                            msg("ℹ️ Grupo sin evaluar.", "#2563eb");
+                        }
+                    } else {
+                        // Formato desconocido
+                        estado.valoraciones = [null, null, null, null, null, null];
+                        msg("⚠️ Formato de datos desconocido.", "red");
+                    }
                     
-                    // Actualizamos inputs visualmente
+                    // Actualizamos la pantalla con seguridad
                     renderizarUI(); 
                     
-                    // Forzar actualización de textareas explícitamente tras cargar
-                    estado.comentarios.forEach((txt, idx) => {
-                         const f = document.querySelector(`tr[data-index="${idx}"] textarea`);
-                         if(f) f.value = txt || "";
-                    });
-
-                    const hayDatos = estado.valoraciones.some(v => v !== null);
-                    msg(hayDatos ? "✅ Datos cargados." : "ℹ️ Grupo sin evaluar.", hayDatos ? "green" : "#2563eb");
                 } else {
-                    msg("⚠️ Error: " + res.message, "red");
+                    msg("⚠️ Error del servidor: " + res.message, "red");
                 }
             })
             .catch(e => {
+                console.error(e);
                 loader.style.display = "none";
                 btn.disabled = false;
-                msg("❌ Error de conexión.", "red");
+                // Mostramos el mensaje exacto del error para depurar
+                msg("❌ ERROR DE CONEXIÓN:\n" + e.message, "red");
             });
     }
 
@@ -328,7 +357,6 @@
 
         if (!grupo) return msg("⚠️ Selecciona un grupo.", "red");
         
-        // Enviamos TODO el estado (notas y comentarios)
         const payload = {
             grupo: grupo,
             valoraciones: estado.valoraciones,
@@ -351,7 +379,7 @@
             btn.textContent = "Guardar Notas y Comentarios";
         })
         .catch(e => {
-            msg("❌ Error al guardar.", "red");
+            msg("❌ Error al guardar. Revisa tu conexión.", "red");
             btn.disabled = false;
         });
     }
@@ -360,7 +388,7 @@
         const m = document.getElementById('statusMessage');
         m.textContent = txt;
         m.style.color = color;
-        m.style.backgroundColor = color === 'red' ? '#fee2e2' : 'transparent';
+        m.style.backgroundColor = color === 'red' ? '#fee2e2' : (color === '#d97706' ? '#fef3c7' : 'transparent');
     }
 </script>
 
