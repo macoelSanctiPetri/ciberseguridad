@@ -24,7 +24,7 @@
         }
 
         .container {
-            max-width: 1300px; /* Un poco m芍s ancho para las 3 columnas */
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             padding: 30px;
@@ -34,10 +34,11 @@
 
         h1 { text-align: center; color: var(--primary); margin-bottom: 30px; }
 
-        /* Panel Superior (Ahora 3 columnas) */
+        /* Panel Superior */
         .top-panel {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr; /* 3 columnas iguales */
+            /* Columnas: Selector | Alumnos | Comentario Grupal | Calificaci車n */
+            grid-template-columns: 1fr 1fr 1.5fr 0.8fr; 
             gap: 20px;
             margin-bottom: 30px;
             align-items: stretch;
@@ -64,7 +65,7 @@
         #studentsList { color: #14532d; font-style: italic; font-size: 0.9em; }
         #studentsList ul { margin: 0; padding-left: 20px; }
 
-        /* 3. Panel Comentario Grupal (NUEVO) */
+        /* 3. Panel Comentario Grupal */
         .group-comment-panel {
             background: #fff7ed;
             border: 1px solid #fed7aa;
@@ -81,11 +82,33 @@
             border: 1px solid #fdba74;
             border-radius: 6px;
             font-family: inherit; font-size: 0.9em;
-            resize: none; /* Fijo al tama?o del panel */
+            resize: none;
             margin-top: 5px;
-            box-sizing: border-box; /* Para que el padding no desborde */
+            box-sizing: border-box;
         }
         textarea.group-comment-box:focus { outline: none; border-color: #f97316; box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.1); }
+
+        /* 4. Panel Calificaci車n */
+        .final-score-panel {
+            background: #fdf2f8; /* Rosa muy claro */
+            border: 1px solid #fbcfe8;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .title-score { color: #be185d; }
+        #finalScoreDisplay {
+            font-size: 3.5em;
+            font-weight: 800;
+            color: #be185d;
+            line-height: 1;
+            margin-top: 10px;
+        }
+        .score-subtitle { font-size: 0.8em; color: #db2777; margin-top: 5px; }
 
         #loadingIndicator { color: var(--primary); font-weight: bold; display: none; margin-top: 10px; }
 
@@ -106,6 +129,7 @@
         .score-cell {
             text-align: center; cursor: pointer; transition: all 0.2s;
             font-weight: bold; color: #94a3b8; border-left: 1px solid #f1f5f9;
+            user-select: none; /* Evita que se seleccione el texto al hacer doble clic r芍pido */
         }
         .score-cell:hover { background-color: #f0f9ff; color: var(--primary); }
         .selected {
@@ -133,7 +157,10 @@
         #statusMessage { text-align: center; margin-top: 15px; font-weight: bold; min-height: 24px; padding: 10px; border-radius: 6px; white-space: pre-line; }
         .header-scores th { font-size: 0.8em; text-transform: uppercase; }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) {
+            .top-panel { grid-template-columns: 1fr 1fr; } /* 2x2 en pantallas medianas */
+        }
+        @media (max-width: 600px) {
             .top-panel { grid-template-columns: 1fr; } /* Apilar en m車viles */
         }
     </style>
@@ -150,14 +177,14 @@
             <label for="grupoSelect" style="font-size:0.9em; margin-bottom:5px">Elegir Grupo:</label>
             <select id="grupoSelect" onchange="cargarDatosGrupo()">
                 <option value="" disabled selected>-- Elige un grupo --</option>
-                <option value="GRUPO1">GRUPO 1</option>
-                <option value="GRUPO2">GRUPO 2</option>
-                <option value="GRUPO3">GRUPO 3</option>
-                <option value="GRUPO4">GRUPO 4</option>
-                <option value="GRUPO5">GRUPO 5</option>
-                <option value="GRUPO6">GRUPO 6</option>
+                <option value="1">GRUPO 1</option>
+                <option value="2">GRUPO 2</option>
+                <option value="3">GRUPO 3</option>
+                <option value="4">GRUPO 4</option>
+                <option value="5">GRUPO 5</option>
+                <option value="6">GRUPO 6</option>
             </select>
-            <div id="loadingIndicator">&#128260; Cargando datos...</div>
+            <div id="loadingIndicator">&#128260; Consultando hoja...</div>
         </div>
 
         <!-- 2. Panel Alumnos -->
@@ -166,10 +193,17 @@
             <div id="studentsList">Selecciona un grupo para ver los alumnos.</div>
         </div>
 
-        <!-- 3. Panel Comentario Grupal (NUEVO) -->
+        <!-- 3. Panel Comentario Grupal -->
         <div class="group-comment-panel">
             <span class="panel-title title-comment">&#128221; Comentario Grupal (Acta):</span>
             <textarea id="groupComment" class="group-comment-box" placeholder="Escribe aqu&iacute; una valoraci&oacute;n general del grupo..."></textarea>
+        </div>
+
+        <!-- 4. Panel Calificaci車n -->
+        <div class="final-score-panel">
+            <span class="panel-title title-score">&#11088; Calificaci&oacute;n</span>
+            <div id="finalScoreDisplay">--</div>
+            <div class="score-subtitle">Escala 0-10<br>(Blancos cuentan como 0)</div>
         </div>
     </div>
 
@@ -190,6 +224,7 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- 赤ndices 0, 1, 2 -->
                 <tr class="fila-evaluacion" data-index="0">
                     <td>Dominio</td><td class="col-desc">Comprensi&oacute;n profunda y terminolog&iacute;a correcta.</td>
                     <td class="score-cell" onclick="selectScore(0, 1)">1</td><td class="score-cell" onclick="selectScore(0, 2)">2</td><td class="score-cell" onclick="selectScore(0, 3)">3</td><td class="score-cell" onclick="selectScore(0, 4)">4</td><td class="score-cell" onclick="selectScore(0, 5)">5</td>
@@ -222,6 +257,7 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- 赤ndices 3, 4, 5 -->
                 <tr class="fila-evaluacion" data-index="3">
                     <td>Claridad</td><td class="col-desc">L&oacute;gica, clara y f&aacute;cil de seguir.</td>
                     <td class="score-cell" onclick="selectScore(3, 1)">1</td><td class="score-cell" onclick="selectScore(3, 2)">2</td><td class="score-cell" onclick="selectScore(3, 3)">3</td><td class="score-cell" onclick="selectScore(3, 4)">4</td><td class="score-cell" onclick="selectScore(3, 5)">5</td>
@@ -250,20 +286,31 @@
 
 <script>
     // ==========================================
-    // CONFIGURACI車N: PEGA TU NUEVA URL AQU赤
+    // CONFIGURACI車N
     // ==========================================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwDnqlFezOdEL3b50L6FILkegGJslrBzLikhCD4gKk2h53bhGf9umRPrdRe2Zh_fzkb/exec"; 
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsyW9LoHd8qEQabJOpiwjWBX2xesv9-uW0ikzhUpVNVByAAQ3eqjj1cut5Tc8V-GRQ/exec"; 
+    
+    // Constante para el c芍lculo de la media
+    const TOTAL_CRITERIOS = 6; 
 
     let estado = {
         valoraciones: [null, null, null, null, null, null],
-        comentarios: ["", "", "", "", "", ""]
-        // El comentario grupal se lee directamente del DOM cuando se necesita
+        comentarios: ["", "", "", "", "", ""],
+        notaFinalCalculada: 0
     };
 
     function selectScore(index, valor) {
         if (!estado.valoraciones) estado.valoraciones = [null, null, null, null, null, null];
-        estado.valoraciones[index] = valor;
+        
+        // L車GICA DE TOGGLE: Si pulso lo que ya est芍 seleccionado, lo pongo a null (0)
+        if (estado.valoraciones[index] === valor) {
+            estado.valoraciones[index] = null;
+        } else {
+            estado.valoraciones[index] = valor;
+        }
+
         renderizarUI();
+        calcularNotaFinal(); 
     }
 
     function guardarComentario(index, texto) {
@@ -271,18 +318,65 @@
         estado.comentarios[index] = texto;
     }
 
+    // L車GICA DE C芍LCULO: Blancos = 0
+    function calcularNotaFinal() {
+        let sumaNotas = 0;
+        let hayAlgunaNota = false;
+
+        estado.valoraciones.forEach((nota) => {
+            if (nota !== null) {
+                sumaNotas += nota;
+                hayAlgunaNota = true;
+            }
+            // Si es null, suma 0, as赤 que no hace falta else
+        });
+
+        const display = document.getElementById('finalScoreDisplay');
+        
+        // Si no se ha tocado nada (todo null), mostramos "--"
+        if (!hayAlgunaNota) {
+            display.textContent = "--";
+            display.style.color = "#be185d"; // Color original del t赤tulo
+            estado.notaFinalCalculada = 0;
+            return;
+        }
+
+        // C芍LCULO: (Suma / 6) * 2
+        // Dividimos siempre entre el total de criterios (6)
+        // Ejemplo: Si marco un solo '5' y el resto blancos -> 5 / 6 * 2 = 1.7 (aprox)
+        const media = (sumaNotas / TOTAL_CRITERIOS) * 2;
+        
+        // Redondear a 1 decimal
+        const notaFinal = Math.round(media * 10) / 10;
+        
+        display.textContent = notaFinal.toFixed(1);
+        
+        // Colores seg迆n nota (Escala 0-10)
+        if(notaFinal < 5) display.style.color = "#dc2626"; // Rojo
+        else if(notaFinal < 7) display.style.color = "#d97706"; // Naranja
+        else display.style.color = "#16a34a"; // Verde
+
+        estado.notaFinalCalculada = notaFinal;
+    }
+
     function renderizarUI() {
         if (!estado.valoraciones) return;
+        
+        // Primero quitamos la clase 'selected' de TODAS las celdas
         document.querySelectorAll('.score-cell').forEach(c => c.classList.remove('selected'));
+        
+        // Luego pintamos solo las que tengan valor (no sean null)
         estado.valoraciones.forEach((valor, index) => {
             if (valor !== null) {
                 const fila = document.querySelector(`tr[data-index="${index}"]`);
                 if(fila) {
                     const celdas = fila.querySelectorAll('.score-cell');
+                    // valor-1 porque el array es 赤ndice 0 pero valor es 1-5
                     if (celdas[valor - 1]) celdas[valor - 1].classList.add('selected');
                 }
             }
         });
+
         if (estado.comentarios && Array.isArray(estado.comentarios)) {
             estado.comentarios.forEach((texto, index) => {
                 const fila = document.querySelector(`tr[data-index="${index}"]`);
@@ -297,11 +391,11 @@
     function limpiarFormulario() {
         estado.valoraciones = [null, null, null, null, null, null];
         estado.comentarios = ["", "", "", "", "", ""];
+        estado.notaFinalCalculada = 0;
         
-        // Limpiar inputs
         document.querySelectorAll('textarea').forEach(t => t.value = "");
-        document.getElementById('groupComment').value = ""; // Limpiar comentario grupal
-        document.getElementById('studentsList').innerHTML = "Selecciona un grupo para ver los alumnos.";
+        document.getElementById('groupComment').value = "";
+        document.getElementById('finalScoreDisplay').textContent = "--";
         
         renderizarUI();
         msg("&#129696; Formulario limpio.", "#64748b");
@@ -312,56 +406,50 @@
         const loader = document.getElementById('loadingIndicator');
         const btn = document.getElementById('btnGuardar');
         const listaAlumnos = document.getElementById('studentsList');
-        const commentGroup = document.getElementById('groupComment'); // Nuevo elemento
+        const commentGroup = document.getElementById('groupComment');
 
         if (!grupo) return;
         
         limpiarFormulario();
-        msg("", "black");
+        document.getElementById('grupoSelect').value = grupo; 
+
+        msg("Consultando base de datos...", "black");
         loader.style.display = "block";
-        listaAlumnos.innerHTML = "Cargando alumnos...";
+        listaAlumnos.innerHTML = "<em>Buscando alumnos del Grupo " + grupo + "...</em>";
         btn.disabled = true;
 
-        fetch(`${SCRIPT_URL}?grupo=${grupo}`)
-            .then(r => {
-                const type = r.headers.get("content-type");
-                if (type && type.indexOf("application/json") === -1) {
-                    throw new Error("PROBLEMA DE PERMISOS: Revisa que el script sea 'Cualquier persona'.");
-                }
-                return r.json();
-            })
+        const url = `${SCRIPT_URL}?grupo=${encodeURIComponent(grupo)}`;
+
+        fetch(url)
+            .then(r => r.json())
             .then(res => {
                 loader.style.display = "none";
                 btn.disabled = false;
 
                 if (res.status === 'success') {
-                    // 1. Cargar Alumnos
                     if (res.data.alumnos && res.data.alumnos.length > 0) {
                         const htmlAlumnos = "<ul>" + res.data.alumnos.map(a => `<li>${a}</li>`).join("") + "</ul>";
                         listaAlumnos.innerHTML = htmlAlumnos;
                     } else {
-                        listaAlumnos.innerHTML = "&#9888;&#65039; No se encontraron alumnos en la hoja 'COMPONENTES'.";
+                        listaAlumnos.innerHTML = `<span style="color:#dc2626">&#9888;&#65039; No se encontraron alumnos para el <b>Grupo ${grupo}</b>.</span>`;
                     }
 
-                    // 2. Cargar Notas y Comentarios
                     if (res.data.valoraciones) {
                         estado.valoraciones = res.data.valoraciones;
                         estado.comentarios = res.data.comentarios || ["", "", "", "", "", ""];
-                        
-                        // 3. Cargar Comentario Grupal (A12)
                         if (res.data.comentarioGrupal) {
                             commentGroup.value = res.data.comentarioGrupal;
                         }
-
-                        const hayDatos = estado.valoraciones.some(v => v !== null);
-                        if (hayDatos) msg("&#9989; Datos cargados correctamente.", "green");
-                        else msg("&#8505;&#65039; Grupo sin evaluar.", "#2563eb");
+                        calcularNotaFinal(); 
+                        msg("&#9989; Datos cargados correctamente.", "green");
+                    } else {
+                        msg("&#8505;&#65039; Grupo disponible para evaluar.", "#2563eb");
                     }
                     
                     renderizarUI(); 
                     
                 } else {
-                    msg("&#9888;&#65039; Error: " + res.message, "red");
+                    msg("&#9888;&#65039; Error del servidor: " + res.message, "red");
                     listaAlumnos.innerHTML = "Error al cargar.";
                 }
             })
@@ -370,22 +458,26 @@
                 loader.style.display = "none";
                 btn.disabled = false;
                 listaAlumnos.innerHTML = "Error de conexi&oacute;n.";
-                msg("&#10060; " + e.message, "red");
+                msg("&#10060; Error de red o URL.", "red");
             });
     }
 
     function enviarDatos() {
         const grupo = document.getElementById('grupoSelect').value;
         const btn = document.getElementById('btnGuardar');
-        const commentGroup = document.getElementById('groupComment').value; // Leemos el valor
+        const commentGroup = document.getElementById('groupComment').value;
 
         if (!grupo) return msg("&#9888;&#65039; Selecciona un grupo.", "red");
         
+        // NOTA: Quitamos la validaci車n que imped赤a guardar con nulos, 
+        // ya que ahora "nulo" es un "0" v芍lido.
+
         const payload = {
             grupo: grupo,
             valoraciones: estado.valoraciones,
             comentarios: estado.comentarios,
-            comentarioGrupal: commentGroup // A?adimos al env赤o
+            comentarioGrupal: commentGroup,
+            notaFinal: estado.notaFinalCalculada
         };
 
         btn.disabled = true;
@@ -399,9 +491,12 @@
             body: JSON.stringify(payload)
         })
         .then(() => {
-            msg("&#9989; \?Guardado con &eacute;xito!", "green");
+            msg("&#9989; \u00A1Guardado con \u00E9xito!", "green");
             btn.disabled = false;
-            btn.textContent = "Guardar Evaluaci&oacute;n";
+            btn.textContent = "Guardar Evaluaci車n";
+            limpiarFormulario();
+            document.getElementById('grupoSelect').value = "";
+            document.getElementById('studentsList').innerHTML = "Selecciona un grupo para ver los alumnos.";
         })
         .catch(e => {
             msg("&#10060; Error al guardar.", "red");
