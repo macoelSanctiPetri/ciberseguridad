@@ -392,7 +392,8 @@
         } else {
             const media = (sumaNotas / TOTAL_CRITERIOS) * 2;
             notaFinal = Math.round(media * 10) / 10;
-            display.textContent = notaFinal.toFixed(1);
+            // FORMATEO VISUAL GLOBAL: USAR COMA
+            display.textContent = notaFinal.toFixed(1).replace('.', ',');
             
             if(notaFinal < 5) display.style.color = "#dc2626"; 
             else if(notaFinal < 7) display.style.color = "#d97706"; 
@@ -407,16 +408,15 @@
             
             if(!input) return;
 
-            // Si est¨¢ modificado manualmente, NO tocamos el valor
             if (input.getAttribute('data-modified') === 'true') {
                 if(mostrarTics) {
                     row.classList.add('has-modified'); 
                 }
             } else {
                 row.classList.remove('has-modified');
-                // Sincronizaci¨®n autom¨¢tica
                 if (hayAlgunaNota) {
-                    input.value = notaFinal.toFixed(1);
+                    // FORMATEO VISUAL INPUT SINCRONIZADO: USAR COMA
+                    input.value = notaFinal.toFixed(1).replace('.', ',');
                 } else {
                     input.value = "";
                 }
@@ -425,6 +425,11 @@
     }
 
     function marcarModificado(input) {
+        // Force comma if user types dot
+        if (input.value.indexOf('.') !== -1) {
+            input.value = input.value.replace('.', ',');
+        }
+        
         input.setAttribute('data-modified', 'true');
         input.classList.add('modified'); 
     }
@@ -437,7 +442,8 @@
         input.classList.remove('modified');
         row.classList.remove('has-modified');
         
-        input.value = estado.notaFinalCalculada > 0 ? estado.notaFinalCalculada.toFixed(1) : "";
+        // FORMATEO VISUAL AL SINCRONIZAR: USAR COMA
+        input.value = estado.notaFinalCalculada > 0 ? estado.notaFinalCalculada.toFixed(1).replace('.', ',') : "";
     }
 
     function renderizarUI() {
@@ -513,21 +519,22 @@
                         res.data.alumnos.forEach(alumnoObj => {
                             const nombre = alumnoObj.nombre;
                             
-                            // Aseguramos que tratamos la nota como String y unificamos decimales
-                            // MODIFICACI¨®N AQUI: Filtrado de fechas
                             let notaPrev = "";
                             if (alumnoObj.nota !== undefined && alumnoObj.nota !== null) {
                                 let valStr = String(alumnoObj.nota).trim();
                                 let cleanVal = valStr.replace(',', '.');
-                                // Si es n¨²mero y no contiene formato fecha/hora prohibido
+                                // Verificamos que sea n¨²mero y no fecha
                                 if (cleanVal !== "" && !isNaN(cleanVal) && !valStr.includes(':') && !valStr.includes('T')) {
-                                    notaPrev = cleanVal;
+                                    // FORMATEO VISUAL: FORZAR COMA PARA DISPLAY
+                                    let numVal = parseFloat(cleanVal);
+                                    // Comprobamos si tiene decimales. Si es entero, toFixed(1) a?ade ,0
+                                    // Si no, respeta. Estandarizamos a 1 decimal y coma.
+                                    notaPrev = numVal.toFixed(1).replace('.', ',');
                                 }
                             }
                             
                             const comPrev = alumnoObj.comentario || "";
                             
-                            // IMPORTANTE: Si viene nota de la BD, la marcamos como "modified" para protegerla
                             const isModified = (notaPrev !== "") ? "true" : "false";
                             const classMod = (notaPrev !== "") ? "modified" : "";
 
@@ -563,24 +570,25 @@
                             commentGroup.value = res.data.comentarioGrupal;
                         }
                         
-                        // Calculamos la nota global (false = no mostrar tics aun)
-                        // IMPORTANTE: Esto NO sobrescribe las notas cargadas porque arriba pusimos data-modified="true"
                         calcularNotaFinal(false); 
 
-                        // L¨®GICA DE SINCRONIZACI¨®N POST-CARGA:
-                        // Si la nota cargada es ID¨¦NTICA a la global calculada, le quitamos la marca de "modificado".
-                        // As¨ª se ver¨¢ "sincronizada" (verde) en lugar de "manual" (naranja).
-                        const globalStr = estado.notaFinalCalculada.toFixed(1);
+                        // L¨®GICA DE SINCRONIZACI¨®N INTELIGENTE (COMA vs PUNTO)
+                        // Calculamos la global con punto para comparar valores num¨¦ricos
+                        const globalVal = estado.notaFinalCalculada; 
                         
                         document.querySelectorAll('.student-grade-input').forEach(input => {
-                            // Si estaba vac¨ªa pero hay global, rellenamos con la global
-                            if (input.value === "" && estado.notaFinalCalculada > 0) {
-                                input.value = globalStr;
+                            // Convertimos valor del input (con coma) a float para comparar
+                            const inputValStr = input.value.replace(',', '.');
+                            const inputVal = parseFloat(inputValStr);
+
+                            // Si estaba vac¨ªa pero hay global, rellenamos con la global (con coma)
+                            if (input.value === "" && globalVal > 0) {
+                                input.value = globalVal.toFixed(1).replace('.', ',');
                                 input.setAttribute('data-modified', 'false');
                                 input.classList.remove('modified');
                             }
-                            // Si coincide con la global, quitamos la marca de modificado
-                            else if (parseFloat(input.value) == parseFloat(globalStr)) {
+                            // Comparaci¨®n num¨¦rica laxa con un margen de error m¨ªnimo por si acaso
+                            else if (!isNaN(inputVal) && Math.abs(inputVal - globalVal) < 0.05) {
                                 input.setAttribute('data-modified', 'false');
                                 input.classList.remove('modified');
                             }
@@ -623,7 +631,12 @@
             if (nameSpan) {
                 const nombre = nameSpan.textContent;
                 if (commentInput) comentariosAlumnos[nombre] = commentInput.value;
-                if (gradeInput) notasAlumnos[nombre] = gradeInput.value; 
+                if (gradeInput) {
+                    // ENVIAR AL SERVIDOR SIEMPRE CON COMA
+                    // Esto evita que "4.1" se convierta en fecha en la hoja de c¨¢lculo
+                    let val = gradeInput.value.replace('.', ',');
+                    notasAlumnos[nombre] = val; 
+                }
             }
         });
 
@@ -634,7 +647,7 @@
             comentarioGrupal: commentGroup,
             comentariosAlumnos: comentariosAlumnos,
             notasAlumnos: notasAlumnos, 
-            notaFinal: estado.notaFinalCalculada 
+            notaFinal: estado.notaFinalCalculada.toFixed(1).replace('.', ',') // Enviar tambi¨¦n con coma
         };
 
         btn.disabled = true;
