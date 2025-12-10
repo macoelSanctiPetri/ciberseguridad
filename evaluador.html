@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluaci&oacute;n Ciberseguridad</title>
+    <title>EvaluaciÃ³n Ciberseguridad</title>
     <style>
         :root {
             --primary: #2563eb;
@@ -37,7 +37,7 @@
         /* Panel Superior */
         .top-panel {
             display: grid;
-            /* Columnas: Selector | Alumnos | Comentario Grupal | Calificaci¨®n */
+            /* Columnas: Selector | Alumnos | Comentario Grupal | Calificaciï¿½ï¿½n */
             grid-template-columns: 1fr 1fr 1.5fr 0.8fr; 
             gap: 20px;
             margin-bottom: 30px;
@@ -88,7 +88,7 @@
         }
         textarea.group-comment-box:focus { outline: none; border-color: #f97316; box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.1); }
 
-        /* 4. Panel Calificaci¨®n */
+        /* 4. Panel Calificaciï¿½ï¿½n */
         .final-score-panel {
             background: #fdf2f8; /* Rosa muy claro */
             border: 1px solid #fbcfe8;
@@ -125,11 +125,11 @@
         .col-notas { width: 5%; text-align: center; }
         .col-comentarios { width: 25%; }
 
-        /* Celdas Puntuaci¨®n */
+        /* Celdas Puntuaciï¿½ï¿½n */
         .score-cell {
             text-align: center; cursor: pointer; transition: all 0.2s;
             font-weight: bold; color: #94a3b8; border-left: 1px solid #f1f5f9;
-            user-select: none; /* Evita que se seleccione el texto al hacer doble clic r¨¢pido */
+            user-select: none; /* Evita que se seleccione el texto al hacer doble clic rï¿½ï¿½pido */
         }
         .score-cell:hover { background-color: #f0f9ff; color: var(--primary); }
         .selected {
@@ -161,7 +161,7 @@
             .top-panel { grid-template-columns: 1fr 1fr; } /* 2x2 en pantallas medianas */
         }
         @media (max-width: 600px) {
-            .top-panel { grid-template-columns: 1fr; } /* Apilar en m¨®viles */
+            .top-panel { grid-template-columns: 1fr; } /* Apilar en mï¿½ï¿½viles */
         }
     </style>
 </head>
@@ -199,7 +199,7 @@
             <textarea id="groupComment" class="group-comment-box" placeholder="Escribe aqu&iacute; una valoraci&oacute;n general del grupo..."></textarea>
         </div>
 
-        <!-- 4. Panel Calificaci¨®n -->
+        <!-- 4. Panel Calificaciï¿½ï¿½n -->
         <div class="final-score-panel">
             <span class="panel-title title-score">&#11088; Calificaci&oacute;n</span>
             <div id="finalScoreDisplay">--</div>
@@ -207,7 +207,7 @@
         </div>
     </div>
 
-    <!-- R¨²BRICA 1 -->
+    <!-- Rï¿½ï¿½BRICA 1 -->
     <div class="rubrica-section">
         <div class="section-title">PARTE 1: TRABAJO ESCRITO</div>
         <table>
@@ -224,7 +224,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- ¨ªndices 0, 1, 2 -->
+                <!-- ï¿½ï¿½ndices 0, 1, 2 -->
                 <tr class="fila-evaluacion" data-index="0">
                     <td>Dominio</td><td class="col-desc">Comprensi&oacute;n profunda y terminolog&iacute;a correcta.</td>
                     <td class="score-cell" onclick="selectScore(0, 1)">1</td><td class="score-cell" onclick="selectScore(0, 2)">2</td><td class="score-cell" onclick="selectScore(0, 3)">3</td><td class="score-cell" onclick="selectScore(0, 4)">4</td><td class="score-cell" onclick="selectScore(0, 5)">5</td>
@@ -244,7 +244,7 @@
         </table>
     </div>
 
-    <!-- R¨²BRICA 2 -->
+    <!-- Rï¿½ï¿½BRICA 2 -->
     <div class="rubrica-section">
         <div class="section-title">PARTE 2: EXPOSICI&Oacute;N ORAL</div>
         <table>
@@ -257,7 +257,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- ¨ªndices 3, 4, 5 -->
+                <!-- ï¿½ï¿½ndices 3, 4, 5 -->
                 <tr class="fila-evaluacion" data-index="3">
                     <td>Claridad</td><td class="col-desc">L&oacute;gica, clara y f&aacute;cil de seguir.</td>
                     <td class="score-cell" onclick="selectScore(3, 1)">1</td><td class="score-cell" onclick="selectScore(3, 2)">2</td><td class="score-cell" onclick="selectScore(3, 3)">3</td><td class="score-cell" onclick="selectScore(3, 4)">4</td><td class="score-cell" onclick="selectScore(3, 5)">5</td>
@@ -286,11 +286,11 @@
 
 <script>
     // ==========================================
-    // CONFIGURACI¨®N
+    // CONFIGURACIï¿½ï¿½N
     // ==========================================
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsyW9LoHd8qEQabJOpiwjWBX2xesv9-uW0ikzhUpVNVByAAQ3eqjj1cut5Tc8V-GRQ/exec"; 
     
-    // Constante para el c¨¢lculo de la media
+    // Constante para el cï¿½ï¿½lculo de la media
     const TOTAL_CRITERIOS = 6; 
 
     let estado = {
@@ -302,7 +302,7 @@
     function selectScore(index, valor) {
         if (!estado.valoraciones) estado.valoraciones = [null, null, null, null, null, null];
         
-        // L¨®GICA DE TOGGLE: Si pulso lo que ya est¨¢ seleccionado, lo pongo a null (0)
+        // Lï¿½ï¿½GICA DE TOGGLE: Si pulso lo que ya estï¿½ï¿½ seleccionado, lo pongo a null (0)
         if (estado.valoraciones[index] === valor) {
             estado.valoraciones[index] = null;
         } else {
@@ -318,7 +318,7 @@
         estado.comentarios[index] = texto;
     }
 
-    // L¨®GICA DE C¨¢LCULO: Blancos = 0
+    // Lï¿½ï¿½GICA DE Cï¿½ï¿½LCULO: Blancos = 0
     function calcularNotaFinal() {
         let sumaNotas = 0;
         let hayAlgunaNota = false;
@@ -328,7 +328,7 @@
                 sumaNotas += nota;
                 hayAlgunaNota = true;
             }
-            // Si es null, suma 0, as¨ª que no hace falta else
+            // Si es null, suma 0, asï¿½ï¿½ que no hace falta else
         });
 
         const display = document.getElementById('finalScoreDisplay');
@@ -336,12 +336,12 @@
         // Si no se ha tocado nada (todo null), mostramos "--"
         if (!hayAlgunaNota) {
             display.textContent = "--";
-            display.style.color = "#be185d"; // Color original del t¨ªtulo
+            display.style.color = "#be185d"; // Color original del tï¿½ï¿½tulo
             estado.notaFinalCalculada = 0;
             return;
         }
 
-        // C¨¢LCULO: (Suma / 6) * 2
+        // Cï¿½ï¿½LCULO: (Suma / 6) * 2
         // Dividimos siempre entre el total de criterios (6)
         // Ejemplo: Si marco un solo '5' y el resto blancos -> 5 / 6 * 2 = 1.7 (aprox)
         const media = (sumaNotas / TOTAL_CRITERIOS) * 2;
@@ -351,7 +351,7 @@
         
         display.textContent = notaFinal.toFixed(1);
         
-        // Colores seg¨²n nota (Escala 0-10)
+        // Colores segï¿½ï¿½n nota (Escala 0-10)
         if(notaFinal < 5) display.style.color = "#dc2626"; // Rojo
         else if(notaFinal < 7) display.style.color = "#d97706"; // Naranja
         else display.style.color = "#16a34a"; // Verde
@@ -371,7 +371,7 @@
                 const fila = document.querySelector(`tr[data-index="${index}"]`);
                 if(fila) {
                     const celdas = fila.querySelectorAll('.score-cell');
-                    // valor-1 porque el array es ¨ªndice 0 pero valor es 1-5
+                    // valor-1 porque el array es ï¿½ï¿½ndice 0 pero valor es 1-5
                     if (celdas[valor - 1]) celdas[valor - 1].classList.add('selected');
                 }
             }
@@ -469,8 +469,8 @@
 
         if (!grupo) return msg("&#9888;&#65039; Selecciona un grupo.", "red");
         
-        // NOTA: Quitamos la validaci¨®n que imped¨ªa guardar con nulos, 
-        // ya que ahora "nulo" es un "0" v¨¢lido.
+        // NOTA: Quitamos la validaciï¿½ï¿½n que impedï¿½ï¿½a guardar con nulos, 
+        // ya que ahora "nulo" es un "0" vï¿½ï¿½lido.
 
         const payload = {
             grupo: grupo,
@@ -493,7 +493,7 @@
         .then(() => {
             msg("&#9989; \u00A1Guardado con \u00E9xito!", "green");
             btn.disabled = false;
-            btn.textContent = "Guardar Evaluaci¨®n";
+            btn.textContent = "Guardar Evaluaciï¿½ï¿½n";
             limpiarFormulario();
             document.getElementById('grupoSelect').value = "";
             document.getElementById('studentsList').innerHTML = "Selecciona un grupo para ver los alumnos.";
